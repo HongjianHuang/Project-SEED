@@ -9,15 +9,17 @@ public class Player_Movement : MonoBehaviour
     private bool on_ground = true;
     private bool is_rolling = false;
 
-    public Transform playerPosition;
     private Controls controls;
     
-    float moveDir;
+    public Rigidbody2D playerRB; 
+    float y_moveDir;
+    float x_moveDir;
+    public float speed;
     private void Awake()
     {
         controls = new Controls();
-        controls.Player.Move.performed += ctx => Move(ctx.ReadValue<float>());
-       
+        controls.Player.MoveRightLeft.performed += ctx => MoveRightLeft(ctx.ReadValue<float>());
+        controls.Player.MoveUpDown.performed += ctx => MoveUpDown(ctx.ReadValue<float>());
         controls.Player.Jump.performed += ctx => Jump();
         controls.Player.Roll.performed += ctx => Roll();
 
@@ -40,17 +42,61 @@ public class Player_Movement : MonoBehaviour
         Debug.Log("player is rolling.");
 
     }
-        private void Move(float dirction)
+    private void MoveRightLeft(float dirction)
     {
         if (is_rolling || !on_ground){return;}
 
         Debug.Log("Player wants to move:" + dirction);
-        moveDir = dirction;
+        x_moveDir = dirction;
+
+    }
+    private void MoveUpDown(float dirction)
+    {
+        if (is_rolling || !on_ground){return;}
+
+        Debug.Log("Player wants to move:" + dirction);
+        y_moveDir = dirction * 0.6f;
 
     }
     private void FixedUpdate()
     {
-        
+        Vector2 moveDir = new Vector2(x_moveDir*speed*Time.fixedDeltaTime, y_moveDir*speed*Time.fixedDeltaTime);
+        playerRB.velocity = moveDir;
+        RaycastHit2D raycastHit = Physics2D.Raycast(transform.position, moveDir, speed * Time.deltaTime);
+        if (raycastHit.collider == null)
+        {
+            //Can move, no hit
+            playerRB.velocity = moveDir;
+        }
+        else
+        {
+            //cannot move hit something
+            Vector3 testMoveDir = new Vector3(moveDir.x, 0f).normalized;
+            raycastHit = Physics2D.Raycast(transform.position, testMoveDir, speed*Time.deltaTime);
+            if (raycastHit.collider == null)
+            {
+                // can move horizontally
+                moveDir = testMoveDir;
+                playerRB.velocity = moveDir;
+
+            }
+            else
+            {
+                //cannot move horizontally
+                testMoveDir = new Vector3 (0f, moveDir.y).normalized;
+                raycastHit = Physics2D.Raycast(transform.position, testMoveDir, speed * Time.deltaTime);
+                if(raycastHit.collider == null){
+                    // Canmove Vertically
+                    
+                }
+                else
+                {
+
+                }
+            }
+
+
+        }
     }
 
 }
