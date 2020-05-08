@@ -15,6 +15,7 @@ public class Player_Movement : MonoBehaviour
     float y_moveDir;
     float x_moveDir;
     public float speed;
+
     private void Awake()
     {
         controls = new Controls();
@@ -58,45 +59,13 @@ public class Player_Movement : MonoBehaviour
         y_moveDir = dirction * 0.6f;
 
     }
-    private void FixedUpdate()
+    private void Update()
     {
-        Vector2 moveDir = new Vector2(x_moveDir*speed*Time.fixedDeltaTime, y_moveDir*speed*Time.fixedDeltaTime);
+
+        
+        Vector2 moveDir = new Vector2(x_moveDir*speed, y_moveDir*speed);
         playerRB.velocity = moveDir;
         RaycastHit2D raycastHit = Physics2D.Raycast(transform.position, moveDir, speed * Time.deltaTime);
-        if (raycastHit.collider == null)
-        {
-            //Can move, no hit
-            playerRB.velocity = moveDir;
-        }
-        else
-        {
-            //cannot move hit something
-            Vector3 testMoveDir = new Vector3(moveDir.x, 0f).normalized;
-            raycastHit = Physics2D.Raycast(transform.position, testMoveDir, speed*Time.deltaTime);
-            if (raycastHit.collider == null)
-            {
-                // can move horizontally
-                moveDir = testMoveDir;
-                playerRB.velocity = moveDir;
-
-            }
-            else
-            {
-                //cannot move horizontally
-                testMoveDir = new Vector3 (0f, moveDir.y).normalized;
-                raycastHit = Physics2D.Raycast(transform.position, testMoveDir, speed * Time.deltaTime);
-                if(raycastHit.collider == null){
-                    // Canmove Vertically
-                    
-                }
-                else
-                {
-
-                }
-            }
-
-
-        }
     }
 
 }
