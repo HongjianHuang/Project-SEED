@@ -12,6 +12,7 @@ public class Player_Movement : MonoBehaviour
     private Controls controls;
     
     public Rigidbody2D playerRB; 
+    public float y_modifier;
     float y_moveDir;
     float x_moveDir;
     public float speed;
@@ -56,7 +57,7 @@ public class Player_Movement : MonoBehaviour
         if (is_rolling || !on_ground){return;}
 
         Debug.Log("Player wants to move:" + dirction);
-        y_moveDir = dirction * 0.6f;
+        y_moveDir = dirction * y_modifier;
 
     }
     private void Update()
