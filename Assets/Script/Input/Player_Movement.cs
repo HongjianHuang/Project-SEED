@@ -8,17 +8,29 @@ public class Player_Movement : MonoBehaviour
 {
     private bool on_ground = true;
     private bool is_rolling = false;
-
+    private CharacterController controller;
+    private Vector3 slopeNormal;
     private Controls controls;
-    
-    public Rigidbody2D playerRB; 
+    public Rigidbody playerRB; 
     public float y_modifier;
     float y_moveDir;
     float x_moveDir;
     public float speed;
-
+    [Header("Movement config")]
+    [SerializeField] private float speedX = 5;
+    [SerializeField] private float speedY = 5;
+    [SerializeField] private float gravity = 0.25f;
+    [SerializeField] private float jumpForce = 8.0f;
+    [SerializeField] private float terminalVelocity = 5.0f;
+    
+    [Header("Ground Check Raycast")]
+    [SerializeField] private float extremitiesOffset = 0.05f;
+    [SerializeField] private float innerVerticalOffset = 0.25f;
+    [SerializeField] private float distanceGrounded = 0.15f;
+    [SerializeField] private float slopeThreshold = 0.55f;
     private void Awake()
     {
+        controller = GetComponent<CharacterController>();
         controls = new Controls();
         controls.Player.MoveRightLeft.performed += ctx => MoveRightLeft(ctx.ReadValue<float>());
         controls.Player.MoveUpDown.performed += ctx => MoveUpDown(ctx.ReadValue<float>());
@@ -57,14 +69,25 @@ public class Player_Movement : MonoBehaviour
         if (is_rolling || !on_ground){return;}
 
         Debug.Log("Player wants to move:" + dirction);
-        y_moveDir = dirction * y_modifier;
+        y_moveDir = dirction;
+
+    }
+
+    private Vector3 PoolInput()
+    {
+        Vector3 r =  default(Vector3);
+
+        r.x = x_moveDir;
+        r.y = y_moveDir;
+
+        return r.normalized;
 
     }
     private void Update()
     {
 
-        
-        Vector2 moveDir = new Vector2(x_moveDir*speed, y_moveDir*speed);
+        Vector3 inputVector = PoolInput();
+        Vector3 moveDir = new Vector3(inputVector.x * speedX,0, inputVector.y*speedY);
         playerRB.velocity = moveDir;
         RaycastHit2D raycastHit = Physics2D.Raycast(transform.position, moveDir, speed * Time.deltaTime);
     }
