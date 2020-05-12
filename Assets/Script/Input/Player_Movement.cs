@@ -18,6 +18,9 @@ public class Player_Movement : MonoBehaviour
     
     public Rigidbody2D playerRB; 
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 9053811... MainMenu fix
+=======
 >>>>>>> parent of 9053811... MainMenu fix
 =======
 >>>>>>> parent of 9053811... MainMenu fix
@@ -79,6 +82,7 @@ public class Player_Movement : MonoBehaviour
         Debug.Log("Player wants to move:" + dirction);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         y_moveDir = dirction;
 
     }
@@ -91,6 +95,9 @@ public class Player_Movement : MonoBehaviour
         r.y = y_moveDir;
 
         return r.normalized;
+=======
+        y_moveDir = dirction * 0.6f;
+>>>>>>> parent of 9053811... MainMenu fix
 =======
         y_moveDir = dirction * 0.6f;
 >>>>>>> parent of 9053811... MainMenu fix
