@@ -11,22 +11,11 @@ public class Player_Movement : MonoBehaviour
     private CharacterController controller;
     private Vector3 slopeNormal;
     private Controls controls;
-<<<<<<< HEAD
     public Rigidbody playerRB; 
     public float y_modifier;
-=======
     
-    public Rigidbody2D playerRB; 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> parent of 9053811... MainMenu fix
-=======
->>>>>>> parent of 9053811... MainMenu fix
-=======
->>>>>>> parent of 9053811... MainMenu fix
-=======
->>>>>>> parent of 9053811... MainMenu fix
+
+
     float y_moveDir;
     float x_moveDir;
     public float speed;
@@ -83,10 +72,7 @@ public class Player_Movement : MonoBehaviour
         if (is_rolling || !on_ground){return;}
 
         Debug.Log("Player wants to move:" + dirction);
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
         y_moveDir = dirction;
 
     }
@@ -99,25 +85,13 @@ public class Player_Movement : MonoBehaviour
         r.y = y_moveDir;
 
         return r.normalized;
-=======
-        y_moveDir = dirction * 0.6f;
->>>>>>> parent of 9053811... MainMenu fix
-=======
-        y_moveDir = dirction * 0.6f;
->>>>>>> parent of 9053811... MainMenu fix
-=======
-        y_moveDir = dirction * 0.6f;
->>>>>>> parent of 9053811... MainMenu fix
-=======
-        y_moveDir = dirction * 0.6f;
->>>>>>> parent of 9053811... MainMenu fix
 
     }
     private void Update()
     {
 
         Vector3 inputVector = PoolInput();
-        Vector3 moveDir = new Vector3(inputVector.x * speedX,0, inputVector.y*speedY);
+        Vector3 moveDir = new Vector3(inputVector.x * speedX,0,inputVector.y*speedY);
         playerRB.velocity = moveDir;
         RaycastHit2D raycastHit = Physics2D.Raycast(transform.position, moveDir, speed * Time.deltaTime);
     }
