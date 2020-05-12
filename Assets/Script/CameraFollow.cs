@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraMovement : MonoBehaviour
+public class CameraFollow : MonoBehaviour
 {
     // Start is called before the first frame update
+<<<<<<< HEAD:Assets/Script/CameraMovement.cs
     [Header("Reference")]
     [SerializeField]private Transform target;
     
@@ -54,5 +55,18 @@ public class CameraMovement : MonoBehaviour
             transform.position = desiredPosition;
         }
         
+=======
+    public Transform target;
+    public float smoothSpeed = 0.125f;
+
+    public Vector3 offset;
+
+
+    void FixedUpdate()
+    {
+        Vector3 desiredPosition = target.position + offset;
+        Vector3 smoothedPostion = Vector3.Lerp (transform.position, desiredPosition, smoothSpeed);
+        transform.position = smoothedPostion;
+>>>>>>> parent of 9053811... MainMenu fix:Assets/Script/CameraFollow.cs
     }
 }
