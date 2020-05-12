@@ -219,6 +219,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+
 >>>>>>> parent of 9053811... MainMenu fix
 =======
 >>>>>>> parent of 9053811... MainMenu fix
@@ -243,6 +244,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+
 =======
   m_Constraints: 0
 --- !u!61 &170685408
@@ -271,6 +273,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.4060173, y: 6.7288733}
   m_EdgeRadius: 0
+
 >>>>>>> parent of 9053811... MainMenu fix
 GameObject:
   m_ObjectHideFlags: 0
