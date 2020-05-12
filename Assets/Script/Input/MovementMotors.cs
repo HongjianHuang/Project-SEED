@@ -9,7 +9,7 @@ public class MovementMotors : MonoBehaviour
     [SerializeField] private Animator animator;
     private CharacterController controller;
     private Vector3 slopeNormal;
-    private bool grounded;
+    [SerializeField] private bool grounded;
     private float verticalVelocity;
 
     [Header("Movement config")]
@@ -40,12 +40,100 @@ public class MovementMotors : MonoBehaviour
         return r.normalized;
 
     }
+    public bool Grounded()
+    {
+        if(verticalVelocity > 0)
+        {
+            return true;
+        }
+        float yRay = (controller.bounds.center.y - (controller.height * 0.5f))
+                    + innerVerticalOffset; // Bottom of the character controller
+        RaycastHit hit;
+        // Mid
+        if (Physics.Raycast(new Vector3(controller.bounds.center.x, yRay, controller.bounds.center.z),
+                            -Vector3.up, out hit, innerVerticalOffset + distanceGrounded))
+        {
+            Debug.DrawRay(new Vector3(controller.bounds.center.x, yRay, controller.bounds.center.z), 
+                -Vector3.up * (innerVerticalOffset + distanceGrounded), Color.red);
+
+            slopeNormal = hit.normal;
+            return true;
+        }
+        // Front Right
+        if (Physics.Raycast(new Vector3(controller.bounds.center.x + (controller.bounds.extents.x - extremitiesOffset),
+                            yRay, controller.bounds.center.z + (controller.bounds.extents.z -extremitiesOffset)),
+                            -Vector3.up, out hit, innerVerticalOffset + distanceGrounded))
+        {
+            slopeNormal = hit.normal;
+            return true;
+        }
+        // Front Left
+        if (Physics.Raycast(new Vector3(controller.bounds.center.x - (controller.bounds.extents.x - extremitiesOffset),
+                            yRay, controller.bounds.center.z + (controller.bounds.extents.z -extremitiesOffset)),
+                            -Vector3.up, out hit, innerVerticalOffset + distanceGrounded))
+        {
+            slopeNormal = hit.normal;
+            return true;
+        }
+        // Back Right
+        if (Physics.Raycast(new Vector3(controller.bounds.center.x + (controller.bounds.extents.x - extremitiesOffset),
+                            yRay, controller.bounds.center.z - (controller.bounds.extents.z -extremitiesOffset)),
+                            -Vector3.up, out hit, innerVerticalOffset + distanceGrounded))
+        {
+            slopeNormal = hit.normal;
+            return true;
+        }
+        // Back Left
+        if (Physics.Raycast(new Vector3(controller.bounds.center.x - (controller.bounds.extents.x - extremitiesOffset),
+                            yRay, controller.bounds.center.z - (controller.bounds.extents.z -extremitiesOffset)),
+                            -Vector3.up, out hit, innerVerticalOffset + distanceGrounded))
+        {
+            slopeNormal = hit.normal;
+            return true;
+        }
+
+        return true;
+        
+    
+    }
     private void FixedUpdate()
     {
+        // Look at which key the user is pressing, store it
         Vector3 inputVector = PoolInput();
-
+        // Multiply the inputs with the speed, and switch Y & Z
         Vector3 moveVector = new Vector3(inputVector.x * speedX, 0, inputVector.y * speedY);
         controller.Move(moveVector * Time.deltaTime);
+        // Store it in a varriable, so we don't call it more than once per frame
+        grounded = Grounded();
+        if (grounded)
+        {
+            // Apply slight gravity
+            verticalVelocity = -1;
+
+            // If spacebar, apply high negative gravity, and forget about the floor
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                verticalVelocity = jumpForce;
+                slopeNormal = Vector3.up; 
+                Debug.Log("space!");
+            }
+
+        }
+        else
+        {
+            verticalVelocity -= gravity;
+            slopeNormal = Vector3.up;
+
+            // Clamp to match terminal velocity, if faster
+            if (verticalVelocity < -terminalVelocity)
+                verticalVelocity = -terminalVelocity;
+        }
+        // Apply vericalVelocity to our movment vector
+        moveVector.y = verticalVelocity;
+
+        //move the controller, checks for collisions
+        controller.Move(moveVector * Time.deltaTime);
+
     }
 
     
