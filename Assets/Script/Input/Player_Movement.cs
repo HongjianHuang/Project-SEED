@@ -19,18 +19,7 @@ public class Player_Movement : MonoBehaviour
     float y_moveDir;
     float x_moveDir;
     public float speed;
-    [Header("Movement config")]
-    [SerializeField] private float speedX = 5;
-    [SerializeField] private float speedY = 5;
-    [SerializeField] private float gravity = 0.25f;
-    [SerializeField] private float jumpForce = 8.0f;
-    [SerializeField] private float terminalVelocity = 5.0f;
-    
-    [Header("Ground Check Raycast")]
-    [SerializeField] private float extremitiesOffset = 0.05f;
-    [SerializeField] private float innerVerticalOffset = 0.25f;
-    [SerializeField] private float distanceGrounded = 0.15f;
-    [SerializeField] private float slopeThreshold = 0.55f;
+
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
