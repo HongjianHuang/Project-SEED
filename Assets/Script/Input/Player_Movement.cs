@@ -6,27 +6,33 @@ public class Player_Movement : MonoBehaviour
 
 
 {
-    private bool on_ground = true;
-    private bool is_rolling = false;
-    private CharacterController controller;
-    private Vector3 slopeNormal;
+    public Rigidbody2D playerRB; 
+    public GameObject playerBody;
+    [Header("State")]
+    [SerializeField] private bool onGround = true;
+    [SerializeField] private bool isRolling = false;
+    [SerializeField] private bool atTop = false;
+    [SerializeField] private int faceDir;
+
+    
     private Controls controls;
-    public Rigidbody playerRB; 
-    public float y_modifier;
+    [Header("Config")]
+    [SerializeField] private float Y_modifier = 0.67f;
+    [SerializeField] private float speed = 20;
+    [SerializeField] private float gravity;
+    
+    private Vector2 moveInput;
+    private float jumpDir;
     
 
 
-    float y_moveDir;
-    float x_moveDir;
-    public float speed;
+    
 
     private void Awake()
     {
-        controller = GetComponent<CharacterController>();
         controls = new Controls();
-        controls.Player.MoveRightLeft.performed += ctx => MoveRightLeft(ctx.ReadValue<float>());
-        controls.Player.MoveUpDown.performed += ctx => MoveUpDown(ctx.ReadValue<float>());
-        controls.Player.Jump.performed += ctx => Jump();
+        controls.Player.Movement.performed += ctx => Move(ctx.ReadValue<Vector2>());
+        //controls.Player.Jump.performed += ctx => Jump(ctx.ReadValue<float>());
         controls.Player.Roll.performed += ctx => Roll();
 
 
@@ -34,55 +40,38 @@ public class Player_Movement : MonoBehaviour
 
     private void OnEnable() => controls.Enable();
     private void Ondisable() => controls.Disable();
-    
-    private void Jump()
+    /*
+    private void Jump(float dirction)
     {
-        if (is_rolling || !on_ground) {return;}
-        Debug.Log("player is jumping.");
+        if (isRolling || !onGround) {return;}
+        Debug.Log("player is jumping." + dirction);
+        float jumpDir = dirction;
+        
 
-    }
+    }*/
     
     private void Roll()
     {
-        if (is_rolling || !on_ground) {return;}
+        if (isRolling || !onGround) {return;}
         Debug.Log("player is rolling.");
 
     }
-    private void MoveRightLeft(float dirction)
+    private void Move(Vector2 dirction)
     {
-        if (is_rolling || !on_ground){return;}
+        if (isRolling || !onGround){return;}
 
         Debug.Log("Player wants to move:" + dirction);
-        x_moveDir = dirction;
-
-    }
-    private void MoveUpDown(float dirction)
-    {
-        if (is_rolling || !on_ground){return;}
-
-        Debug.Log("Player wants to move:" + dirction);
-
-        y_moveDir = dirction;
-
+        moveInput = dirction;
     }
 
-    private Vector3 PoolInput()
-    {
-        Vector3 r =  default(Vector3);
-
-        r.x = x_moveDir;
-        r.y = y_moveDir;
-
-        return r.normalized;
-
-    }
-    private void Update()
+    private void FixedUpdate()
     {
 
-        Vector3 inputVector = PoolInput();
-        Vector3 moveDir = new Vector3(inputVector.x * speedX,0,inputVector.y*speedY);
+        Vector2 moveDir = new Vector2(moveInput.x*speed, moveInput.y*speed*Y_modifier);
         playerRB.velocity = moveDir;
-        RaycastHit2D raycastHit = Physics2D.Raycast(transform.position, moveDir, speed * Time.deltaTime);
+        //Vector2 jump = new Vector2(0, jumpDir*Time.deltaTime);
+        //playerBody.transform.position = jump;
+
     }
 
 }
