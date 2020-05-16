@@ -19,11 +19,15 @@ public class Player_Movement : MonoBehaviour
     private Controls controls;
     [Header("Config")]
     [SerializeField] private float Y_modifier = 0.67f;
-    [SerializeField] private float speed = 20;
-    [SerializeField] private float gravity = 1;
+    [SerializeField] private float speed = 200000000;
+    [SerializeField] private float gravity = 0;
+
+    [SerializeField] private float terminalVelocity = -1.1f;
+
     
     private Vector2 moveInput;
     private float jumpDir;
+
 
     //private BoxCollider2D playerB;
 
@@ -66,7 +70,6 @@ public class Player_Movement : MonoBehaviour
         if (isRolling || !onGround){return;}
 
         Debug.Log("Player wants to move:" + dirction);
-        Debug.Log(playerBody.transform.localPosition);
         moveInput = dirction;
     }
 
@@ -75,10 +78,34 @@ public class Player_Movement : MonoBehaviour
 
         Vector2 moveDir = new Vector2(moveInput.x*speed, moveInput.y*speed*Y_modifier);
         playerRB.velocity = moveDir;
-        playerBody.transform.localPosition = playerBody.transform.localPosition + new Vector3 (0,jumpDir,0);
-        if (playerBody.transform.localPosition.y > 1.1){
+        if (jumpDir >= terminalVelocity || playerBody.transform.localPosition.y > 1)
+        {
             onGround = false;
+            jumpDir -= gravity;
+            playerBody.transform.localPosition = playerBody.transform.localPosition + new Vector3 (0,jumpDir,0);
         }
+        if (playerBody.transform.localPosition.y <= 1)
+        {   
+            onGround = true;
+            playerBody.transform.localPosition = new Vector3 (0,1,0);
+        }
+        
+      
+        
+         /*
+        if (playerBody.transform.localPosition.y > 1)
+        {
+            Debug.Log("2");
+            onGround = false;
+            jumpDir = -gravity;
+            playerBody.transform.localPosition = playerBody.transform.localPosition + new Vector3 (0,jumpDir,0);
+        }
+       
+        if (jumpDir == 1){
+            Debug.Log("3");
+            playerBody.transform.localPosition = playerBody.transform.localPosition + new Vector3 (0,jumpDir*Time.deltaTime,0);
+        }
+        */
     }
 
 }
