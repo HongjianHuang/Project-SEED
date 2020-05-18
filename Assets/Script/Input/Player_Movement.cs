@@ -13,7 +13,7 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] private bool onGround = true;
     [SerializeField] private bool isRolling = false;
     [SerializeField] private bool atTop = false;
-    [SerializeField] private int faceDir;
+    [SerializeField] private bool faceDir;
 
     
     private Controls controls;
@@ -67,27 +67,34 @@ public class Player_Movement : MonoBehaviour
     }
     private void Move(Vector2 dirction)
     {
-        if (isRolling || !onGround){return;}
+        //if (isRolling || !onGround){return;}
 
         Debug.Log("Player wants to move:" + dirction);
         moveInput = dirction;
     }
-
     private void FixedUpdate()
     {
 
         Vector2 moveDir = new Vector2(moveInput.x*speed, moveInput.y*speed*Y_modifier);
-        playerRB.velocity = moveDir;
+        if (Input.GetKey(KeyCode.LeftArrow)){ faceDir = true;}
+        if (Input.GetKey(KeyCode.RightArrow)){ faceDir = false;}
         if (jumpDir >= terminalVelocity || playerBody.transform.localPosition.y > 1)
         {
             onGround = false;
             jumpDir -= gravity;
             playerBody.transform.localPosition = playerBody.transform.localPosition + new Vector3 (0,jumpDir,0);
         }
+
         if (playerBody.transform.localPosition.y <= 1)
         {   
+            /*
+            if(!onGround)
+            {
+                moveInput = new Vector2(0.0f, 0.0f);
+            }*/
             onGround = true;
             playerBody.transform.localPosition = new Vector3 (0,1,0);
+            playerRB.velocity = moveDir;
         }
         
       
