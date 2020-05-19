@@ -8,12 +8,13 @@ public class Player_Movement : MonoBehaviour
 {
     public Rigidbody2D playerRB; 
     public GameObject playerBody;
-    public GameObject playerBox;
+    //public GameObject playerBox;
     [Header("State")]
-    [SerializeField] private bool onGround = true;
+    [SerializeField] private bool onGround;
     [SerializeField] private bool isRolling = false;
-    [SerializeField] private bool atTop = false;
-    [SerializeField] private bool faceDir;
+    //[SerializeField] private bool atTop = false;
+    [SerializeField] private bool faceRight;
+
 
     
     private Controls controls;
@@ -34,7 +35,11 @@ public class Player_Movement : MonoBehaviour
     
 
 
-    
+    private void Start()
+    {
+        faceRight = true;
+        onGround = true;
+    }
 
     private void Awake()
     {
@@ -58,7 +63,17 @@ public class Player_Movement : MonoBehaviour
         
 
     }
-    
+    private void Rotation()
+    {
+        if (faceRight)
+        {
+            playerBody.transform.localRotation = Quaternion.identity;
+        }
+        if (!faceRight)
+        {
+            playerBody.transform.localRotation = new Quaternion(0,-180,0,1);
+        }
+    }
     private void Roll()
     {
         if (isRolling || !onGround) {return;}
@@ -76,8 +91,9 @@ public class Player_Movement : MonoBehaviour
     {
 
         Vector2 moveDir = new Vector2(moveInput.x*speed, moveInput.y*speed*Y_modifier);
-        if (Input.GetKey(KeyCode.LeftArrow)){ faceDir = true;}
-        if (Input.GetKey(KeyCode.RightArrow)){ faceDir = false;}
+        if (Input.GetKey(KeyCode.LeftArrow)){ faceRight = false;}
+        if (Input.GetKey(KeyCode.RightArrow)){ faceRight = true;}
+        Rotation();
         if (jumpDir >= terminalVelocity || playerBody.transform.localPosition.y > 1)
         {
             onGround = false;
