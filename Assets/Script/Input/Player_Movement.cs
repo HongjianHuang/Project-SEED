@@ -57,7 +57,7 @@ public class Player_Movement : MonoBehaviour
 
     private void Jump(float dirction)
     {
-        if (isRolling || !onGround) {return;}
+        if (isRolling || !onGround) return;
         Debug.Log("player is jumping." + dirction);
         jumpDir = dirction;
         
@@ -76,7 +76,7 @@ public class Player_Movement : MonoBehaviour
     }
     private void Roll()
     {
-        if (isRolling || !onGround) {return;}
+        if (isRolling || !onGround) return;
         Debug.Log("player is rolling.");
 
     }
@@ -91,8 +91,8 @@ public class Player_Movement : MonoBehaviour
     {
 
         Vector2 moveDir = new Vector2(moveInput.x*speed, moveInput.y*speed*Y_modifier);
-        if (Input.GetKey(KeyCode.LeftArrow)){ faceRight = false;}
-        if (Input.GetKey(KeyCode.RightArrow)){ faceRight = true;}
+        if (Input.GetKey(KeyCode.LeftArrow)) faceRight = false;
+        if (Input.GetKey(KeyCode.RightArrow)) faceRight = true;
         Rotation();
         if (jumpDir >= terminalVelocity || playerBody.transform.localPosition.y > 1)
         {
