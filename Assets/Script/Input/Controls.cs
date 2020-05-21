@@ -41,6 +41,14 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Att"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""98f90ef9-682a-4c3a-8157-431352dd6f78"",
+                    ""expectedControlType"": ""Integer"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -120,6 +128,17 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b804d077-500e-4d86-927d-e1aa01ed887a"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Att"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -131,6 +150,7 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Roll = m_Player.FindAction("Roll", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_Att = m_Player.FindAction("Att", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -183,6 +203,7 @@ public class @Controls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Roll;
     private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_Att;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -190,6 +211,7 @@ public class @Controls : IInputActionCollection, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Roll => m_Wrapper.m_Player_Roll;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        public InputAction @Att => m_Wrapper.m_Player_Att;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -208,6 +230,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @Att.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAtt;
+                @Att.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAtt;
+                @Att.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAtt;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -221,6 +246,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Att.started += instance.OnAtt;
+                @Att.performed += instance.OnAtt;
+                @Att.canceled += instance.OnAtt;
             }
         }
     }
@@ -230,5 +258,6 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnRoll(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnAtt(InputAction.CallbackContext context);
     }
 }

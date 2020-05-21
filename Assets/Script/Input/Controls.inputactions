@@ -28,6 +28,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Att",
+                    "type": "PassThrough",
+                    "id": "98f90ef9-682a-4c3a-8157-431352dd6f78",
+                    "expectedControlType": "Integer",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -105,6 +113,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b804d077-500e-4d86-927d-e1aa01ed887a",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Att",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

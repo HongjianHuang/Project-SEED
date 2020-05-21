@@ -8,6 +8,8 @@ public class Player_Movement : MonoBehaviour
 {
     public Rigidbody2D playerRB; 
     public GameObject playerBody;
+    private Animator animator;
+
     //public GameObject playerBox;
     [Header("State")]
     [SerializeField] private bool onGround;
@@ -39,6 +41,7 @@ public class Player_Movement : MonoBehaviour
     {
         faceRight = true;
         onGround = true;
+        animator = playerBody.GetComponent<Animator>();
     }
 
     private void Awake()
@@ -47,6 +50,7 @@ public class Player_Movement : MonoBehaviour
         controls.Player.Movement.performed += ctx => Move(ctx.ReadValue<Vector2>());
         controls.Player.Jump.performed += ctx => Jump(ctx.ReadValue<float>());
         controls.Player.Roll.performed += ctx => Roll();
+        controls.Player.Att.performed += ctx => Att(ctx.ReadValue<float>());
         //playerB = playerBox.GetComponent<BoxCollider2D>();
 
 
@@ -62,6 +66,10 @@ public class Player_Movement : MonoBehaviour
         jumpDir = dirction;
         
 
+    }
+    private void Att(float value)
+    {
+        animator.SetTrigger("playerChop");
     }
     private void Rotation()
     {
