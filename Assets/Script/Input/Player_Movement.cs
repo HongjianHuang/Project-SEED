@@ -8,6 +8,8 @@ public class Player_Movement : MonoBehaviour
 {
     public Rigidbody2D playerRB; 
     public GameObject playerBody;
+
+    public GameObject playerAttBox;
     private Animator animator;
 
     //public GameObject playerBox;
@@ -15,7 +17,8 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] private bool onGround;
     [SerializeField] private bool isRolling = false;
     //[SerializeField] private bool atTop = false;
-    [SerializeField] private bool faceRight;
+    [SerializeField] private float faceRight;
+    [SerializeField] private float isAttacking;
 
 
     
@@ -39,7 +42,7 @@ public class Player_Movement : MonoBehaviour
 
     private void Start()
     {
-        faceRight = true;
+        faceRight = 1;
         onGround = true;
         animator = playerBody.GetComponent<Animator>();
     }
@@ -69,15 +72,17 @@ public class Player_Movement : MonoBehaviour
     }
     private void Att(float value)
     {
-        animator.SetTrigger("playerChop");
+        
+        isAttacking = value;
+
     }
     private void Rotation()
     {
-        if (faceRight)
+        if (faceRight == 1)
         {
             playerBody.transform.localRotation = Quaternion.identity;
         }
-        if (!faceRight)
+        if (faceRight != 1)
         {
             playerBody.transform.localRotation = new Quaternion(0,-180,0,1);
         }
@@ -99,8 +104,9 @@ public class Player_Movement : MonoBehaviour
     {
 
         Vector2 moveDir = new Vector2(moveInput.x*speed, moveInput.y*speed*Y_modifier);
-        if (Input.GetKey(KeyCode.LeftArrow)) faceRight = false;
-        if (Input.GetKey(KeyCode.RightArrow)) faceRight = true;
+        playerAttBox.transform.localPosition = Vector3.zero;
+        if (Input.GetKey(KeyCode.LeftArrow)) faceRight = -1;
+        if (Input.GetKey(KeyCode.RightArrow)) faceRight = 1;
         Rotation();
         if (jumpDir >= terminalVelocity || playerBody.transform.localPosition.y > 1)
         {
@@ -116,6 +122,12 @@ public class Player_Movement : MonoBehaviour
             {
                 moveInput = new Vector2(0.0f, 0.0f);
             }*/
+            if(isAttacking == 1)
+            { 
+                moveDir = new Vector2(0,0);
+                animator.SetTrigger("playerChop");
+                playerAttBox.transform.localPosition = new Vector3 (faceRight,0,0);
+            }
             onGround = true;
             playerBody.transform.localPosition = new Vector3 (0,1,0);
             playerRB.velocity = moveDir;
