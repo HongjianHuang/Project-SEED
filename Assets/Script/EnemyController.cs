@@ -8,6 +8,8 @@ public class EnemyController : MonoBehaviour
     public int partsNum;
     public int hitPoint; 
 
+    private List<Vector2> points;
+
     void Start()
     {
         hitPoint = 2;
@@ -18,6 +20,10 @@ public class EnemyController : MonoBehaviour
     private void Attack()
     {
 
+    }
+    private void AttchPoints()
+    {
+        
     }
 
     private void FixedUpdate()
