@@ -9,7 +9,7 @@ public class EndPoint : MonoBehaviour
     {
 
 
-        if (collider.tag == "PlayerFoot")
+        if (collider.name == "End Point Collider")
         {
             Debug.Log("You win!");
         }
