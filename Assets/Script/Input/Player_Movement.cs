@@ -35,6 +35,8 @@ public class Player_Movement : MonoBehaviour
     private float jumpDir;
 
 
+
+
     //private BoxCollider2D playerB;
 
     
@@ -54,6 +56,8 @@ public class Player_Movement : MonoBehaviour
         controls.Player.Jump.performed += ctx => Jump(ctx.ReadValue<float>());
         controls.Player.Roll.performed += ctx => Roll();
         controls.Player.Att.performed += ctx => Att(ctx.ReadValue<float>());
+        playerAttBox.transform.localPosition = Vector3.zero;
+
         //playerB = playerBox.GetComponent<BoxCollider2D>();
 
 
@@ -104,14 +108,24 @@ public class Player_Movement : MonoBehaviour
     {
 
         Vector2 moveDir = new Vector2(moveInput.x*speed, moveInput.y*speed*Y_modifier);
-        playerAttBox.transform.localPosition = Vector3.zero;
+       
         if (Input.GetKey(KeyCode.LeftArrow)) faceRight = -1;
         if (Input.GetKey(KeyCode.RightArrow)) faceRight = 1;
         Rotation();
+        if(isAttacking == 0)
+        {
+            playerAttBox.gameObject.SetActive(false);
+
+        }
         if (jumpDir >= terminalVelocity || playerBody.transform.localPosition.y > 1)
         {
             onGround = false;
             jumpDir -= gravity;
+            if(isAttacking == 1)
+            {
+                animator.SetTrigger("playerChop");
+                playerAttBox.gameObject.SetActive(true);
+            }
             playerBody.transform.localPosition = playerBody.transform.localPosition + new Vector3 (0,jumpDir,0);
         }
 
@@ -126,7 +140,7 @@ public class Player_Movement : MonoBehaviour
             { 
                 moveDir = new Vector2(0,0);
                 animator.SetTrigger("playerChop");
-                playerAttBox.transform.localPosition = new Vector3 (faceRight,0,0);
+                playerAttBox.gameObject.SetActive(true);
             }
             onGround = true;
             playerBody.transform.localPosition = new Vector3 (0,1,0);

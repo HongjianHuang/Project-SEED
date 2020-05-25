@@ -6,7 +6,7 @@ public class EnemyController : MonoBehaviour
 {
     // Start is called before the first frame update
     public int partsNum;
-    private int hitPoint; 
+    public int hitPoint; 
 
     void Start()
     {
@@ -14,6 +14,7 @@ public class EnemyController : MonoBehaviour
     }
 
     // Update is called once per frame
+    
     private void Attack()
     {
 
@@ -22,5 +23,13 @@ public class EnemyController : MonoBehaviour
     private void FixedUpdate()
     {
         if (hitPoint <= 0) gameObject.SetActive(false);
+    }
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if(collider.name == "PlayerAttBox" )
+        {
+            hitPoint -= 1;
+            Debug.Log("hit!");
+        }
     }
 }
