@@ -11,8 +11,11 @@ public class EnemyParts : MonoBehaviour
     private Vector2 min;
     private Vector2 max;
     
+    private EnemyController enemyController;
     private Collider2D col;
     private Dictionary<string, Vector2> points = new Dictionary<string, Vector2>();
+
+    private Dictionary<string, Vector2> randomPoints = new Dictionary<string, Vector2>();
 
     private void Awake()
     {
@@ -20,20 +23,47 @@ public class EnemyParts : MonoBehaviour
     }
     void Start()
     {
-        
+        enemyController = gameObject.GetComponentInParent<EnemyController>();
         col = gameObject.GetComponent<Collider2D>();
         center = col.bounds.center;
         size = col.bounds.size;
         min = col.bounds.min;
         max = col.bounds.max;
         calculatePoint();
-        
+        randomPoints = randomListElement();
+    }
+    public List<string> keyToList(Dictionary<string, Vector2> pointsDic)
+    {
+        List<string> keyList = new List<string>();
+        foreach (KeyValuePair<string, Vector2> entry in pointsDic)
+        {
+            keyList.Add(entry.Key);
+        }
+        return keyList;
+    }
+    private Dictionary<string, Vector2> randomListElement()
+    {
+        List<string> keyList = keyToList(points);
+        Dictionary<string, Vector2> result = new Dictionary<string, Vector2>();
+        List<int> indexList = new List<int>();
+        for (int i = 0; i < keyList.Count; i++)
+        {
+            indexList.Add(i);
+        }
+        for (int n = 0; n < enemyController.partsNum; n++)
+        {
+            int index = Random.Range(0, indexList.Count);
+            int randomIndex = indexList[index];
+            indexList.Remove(index);
+            result.Add(keyList[randomIndex], points[keyList[randomIndex]]);
+        }
+        return result;
     }
     private void OnDrawGizmos()
     {
-        foreach (KeyValuePair<string, Vector2> entry in points)
+
+        foreach (KeyValuePair<string, Vector2> entry in randomPoints)
         {
-            Debug.Log(entry);
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position + 
                 new Vector3(entry.Value.x, entry.Value.y, 0), 0.5f);

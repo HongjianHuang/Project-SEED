@@ -11,22 +11,13 @@ public class EnemyController : MonoBehaviour
 
 
 
-    void Start()
+    private void Awake()
     {
         hitPoint = 2;
-
+        partsNum = Random.Range(0,6);
     }
 
     // Update is called once per frame
-    
-    private void Attack()
-    {
-
-    }
-    private void AttchPoints()
-    {
-        
-    }
 
     private void FixedUpdate()
     {
