@@ -8,11 +8,13 @@ public class EnemyController : MonoBehaviour
     public int partsNum;
     public int hitPoint; 
 
-    private List<Vector2> points;
+
+
 
     void Start()
     {
         hitPoint = 2;
+
     }
 
     // Update is called once per frame
