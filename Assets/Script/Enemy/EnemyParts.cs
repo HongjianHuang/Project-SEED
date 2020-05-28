@@ -45,21 +45,29 @@ public class EnemyParts : MonoBehaviour
     }
     private Dictionary<string, Vector2> randomListElement()
     {
-        //return a dictionary of matching keys and value,
+        //return a dictionary of matching keys and value
         List<string> keyList = keyToList(points);
         Dictionary<string, Vector2> result = new Dictionary<string, Vector2>();
+        //Use indexList to make sure every index only appear once
         List<int> indexList = new List<int>();
+        Debug.Log(enemyController.partsNum);
         for (int i = 0; i < keyList.Count; i++)
         {
             indexList.Add(i);
+
         }
+        //for the random number of times, add a random parts to the enemy; 
         for (int n = 0; n < enemyController.partsNum; n++)
         {
-            int index = Random.Range(0, indexList.Count);
+            int index = Random.Range(0, indexList.Count); 
             int randomIndex = indexList[index];
-            indexList.Remove(index);
+            indexList.Remove(indexList[index]);
+            Debug.Log("random index is " + randomIndex);
+            Debug.Log(n + " times of loop");
+            Debug.Log("indexList length is " + indexList.Count);
+            Debug.Log("the key is "+ keyList[randomIndex]);
             result.Add(keyList[randomIndex], points[keyList[randomIndex]]);
-            keyList.Remove(keyList[randomIndex]);
+            //keyList.Remove(keyList[randomIndex]);
         }
         return result;
     }

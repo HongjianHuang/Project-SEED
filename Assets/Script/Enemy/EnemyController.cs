@@ -14,7 +14,7 @@ public class EnemyController : MonoBehaviour
     private void Awake()
     {
         hitPoint = 2;
-        partsNum = Random.Range(0,6);
+        partsNum = Random.Range(0,7);
     }
 
     // Update is called once per frame
