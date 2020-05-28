@@ -126,7 +126,7 @@ public class Player_Movement : MonoBehaviour
                 animator.SetTrigger("playerChop");
                 playerAttBox.gameObject.SetActive(true);
             }
-            playerBody.transform.localPosition = playerBody.transform.localPosition + new Vector3 (0,jumpDir,0);
+            playerBody.transform.position = playerBody.transform.position + new Vector3 (0,jumpDir,0);
         }
 
         if (playerBody.transform.localPosition.y <= 1)

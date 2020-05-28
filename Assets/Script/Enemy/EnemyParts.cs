@@ -18,6 +18,7 @@ public class EnemyParts : MonoBehaviour
 
     private Dictionary<string, Vector2> randomPoints = new Dictionary<string, Vector2>();
 
+
     private void Awake()
     {
         
@@ -32,6 +33,25 @@ public class EnemyParts : MonoBehaviour
         max = col.bounds.max;
         calculatePoint();
         randomPoints = randomListElement();
+        
+        
+        
+        foreach (KeyValuePair<string, Vector2> entry in randomPoints)
+        {
+            string randomNum = Random.Range(0,5).ToString();
+            GameObject enemyParts = Resources.Load("Prefab/Enemy/EnemyParts" + randomNum, typeof(GameObject)) as GameObject;
+            Debug.Log("Prefab/EnemyParts" + randomNum);
+            
+            if (enemyParts != null)
+            {
+                Instantiate(enemyParts, transform.position + 
+                            new Vector3(entry.Value.x, entry.Value.y, 0), transform.rotation, transform);
+               
+     
+            }
+            
+            
+        }
     }
     public List<string> keyToList(Dictionary<string, Vector2> pointsDic)
     {
@@ -62,12 +82,8 @@ public class EnemyParts : MonoBehaviour
             int index = Random.Range(0, indexList.Count); 
             int randomIndex = indexList[index];
             indexList.Remove(indexList[index]);
-            Debug.Log("random index is " + randomIndex);
-            Debug.Log(n + " times of loop");
-            Debug.Log("indexList length is " + indexList.Count);
-            Debug.Log("the key is "+ keyList[randomIndex]);
             result.Add(keyList[randomIndex], points[keyList[randomIndex]]);
-            //keyList.Remove(keyList[randomIndex]);
+            
         }
         return result;
     }

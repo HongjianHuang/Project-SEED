@@ -8,16 +8,42 @@ public class BrokenParts : MonoBehaviour
     public GameObject enemyFoot;
 
     private Vector3 footPosition;
+
+    private Vector3 randomPosition;
+    private BoxCollider2D col;
+
+    [Header("config")]
+    [SerializeField] private float yForce;
+    [SerializeField] private float xForce;
+    [SerializeField] private float gravity;
     
-    void Start()
+    private void Start()
     {
         footPosition = enemyFoot.transform.position;
+        yForce = Random.Range(-0.05f, 0.1f);
+        xForce = Random.Range(-0.5f, 0.5f);
+        gravity = Random.Range(0.045f, 0.01f);
+        randomPosition = new Vector3 (footPosition.x + Random.Range(-2f, 2f),
+        footPosition.y + Random.Range(-2f, 2f), 0);
+        col = gameObject.GetComponent<BoxCollider2D>();
+        col.enabled = false; 
         Debug.Log(footPosition);
+        Debug.Log(randomPosition);
+        Debug.Log(gameObject.transform.position);
+        
     }
 
     // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        footPosition = enemyFoot.transform.position;
+        if (gameObject.transform.position.y <= randomPosition.y)
+        {
+            col.enabled = true;
+            enabled = false;
+        }
+        yForce -= gravity;
+        transform.localPosition =  transform.localPosition + new Vector3(xForce, yForce,0);
+
+            
     }
 }
