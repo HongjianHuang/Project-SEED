@@ -13,6 +13,7 @@ public class EnemyParts : MonoBehaviour
     
     private EnemyController enemyController;
     private Collider2D col;
+
     private Dictionary<string, Vector2> points = new Dictionary<string, Vector2>();
 
     private Dictionary<string, Vector2> randomPoints = new Dictionary<string, Vector2>();
@@ -39,10 +40,12 @@ public class EnemyParts : MonoBehaviour
         {
             keyList.Add(entry.Key);
         }
+        
         return keyList;
     }
     private Dictionary<string, Vector2> randomListElement()
     {
+        //return a dictionary of matching keys and value,
         List<string> keyList = keyToList(points);
         Dictionary<string, Vector2> result = new Dictionary<string, Vector2>();
         List<int> indexList = new List<int>();
@@ -56,6 +59,7 @@ public class EnemyParts : MonoBehaviour
             int randomIndex = indexList[index];
             indexList.Remove(index);
             result.Add(keyList[randomIndex], points[keyList[randomIndex]]);
+            keyList.Remove(keyList[randomIndex]);
         }
         return result;
     }
