@@ -21,7 +21,7 @@ public class BrokenParts : MonoBehaviour
     {
         enemyFoot = GameObject.Find("EnemyFoot");
         footPosition = enemyFoot.transform.position;
-        yForce = Random.Range(-0.05f, 0.65f);
+        yForce = Random.Range(-0.1f, 0.65f);
         xForce = Random.Range(-0.25f, 0.25f);
         gravity = Random.Range(0.045f, 0.01f);
         randomPosition = new Vector3 (footPosition.x + Random.Range(-2f, 2f),
@@ -31,6 +31,7 @@ public class BrokenParts : MonoBehaviour
         Debug.Log(footPosition);
         Debug.Log(randomPosition);
         Debug.Log(gameObject.transform.position);
+        col.enabled = true;
         
     }
 
@@ -39,7 +40,6 @@ public class BrokenParts : MonoBehaviour
     {
         if (gameObject.transform.position.y <= randomPosition.y)
         {
-            col.enabled = true;
             enabled = false;
         }
         yForce -= gravity;
