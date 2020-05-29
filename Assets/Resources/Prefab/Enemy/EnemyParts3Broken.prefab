@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3180087620296169354}
   - component: {fileID: 3180087620296169352}
   m_Layer: 0
-  m_Name: EnemyParts 1 Broken 0-3
+  m_Name: EnemyParts 0 Broken 0-3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 2f29faa077951a9458efa1e3021d2d95, type: 3}
-  m_Color: {r: 0.9725491, g: 0.10588236, b: 0.10588236, a: 1}
+  m_Color: {r: 0.078431375, g: 0.32156864, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -144,7 +144,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 396fa9e5a2107614d94d511f0c998651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyFoot: {fileID: 0}
   yForce: 0
   xForce: 0
   gravity: 0
@@ -162,7 +161,7 @@ GameObject:
   - component: {fileID: 3180087620819401461}
   - component: {fileID: 3180087620819401459}
   m_Layer: 0
-  m_Name: EnemyParts 1 Broken 0-2
+  m_Name: EnemyParts 0 Broken 0-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -223,7 +222,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 2f29faa077951a9458efa1e3021d2d95, type: 3}
-  m_Color: {r: 0.9725491, g: 0.10588236, b: 0.10588236, a: 1}
+  m_Color: {r: 0.078431375, g: 0.32156864, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -292,7 +291,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 396fa9e5a2107614d94d511f0c998651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyFoot: {fileID: 0}
   yForce: 0
   xForce: 0
   gravity: 0
@@ -310,7 +308,7 @@ GameObject:
   - component: {fileID: 3180087621026068814}
   - component: {fileID: 3180087621026068812}
   m_Layer: 0
-  m_Name: EnemyParts 1 Broken 0-1
+  m_Name: EnemyParts 0 Broken 0-1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -371,7 +369,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 2f29faa077951a9458efa1e3021d2d95, type: 3}
-  m_Color: {r: 0.9725491, g: 0.10588236, b: 0.10588236, a: 1}
+  m_Color: {r: 0.078431375, g: 0.32156864, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -440,7 +438,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 396fa9e5a2107614d94d511f0c998651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyFoot: {fileID: 0}
   yForce: 0
   xForce: 0
   gravity: 0
@@ -454,7 +451,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3180087621477532242}
   m_Layer: 0
-  m_Name: EnemyPartsBroken1
+  m_Name: EnemyParts3Broken
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -492,7 +489,7 @@ GameObject:
   - component: {fileID: 3180087622295214157}
   - component: {fileID: 3180087622295214156}
   m_Layer: 0
-  m_Name: EnemyParts 1 Broken 0-0
+  m_Name: EnemyParts 0 Broken 0-0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -553,7 +550,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 2f29faa077951a9458efa1e3021d2d95, type: 3}
-  m_Color: {r: 0.9725491, g: 0.10588236, b: 0.10588236, a: 1}
+  m_Color: {r: 0.078431375, g: 0.32156864, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -622,7 +619,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 396fa9e5a2107614d94d511f0c998651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyFoot: {fileID: 0}
   yForce: 0
   xForce: 0
   gravity: 0

@@ -5,7 +5,7 @@ using UnityEngine;
 public class BrokenParts : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject enemyFoot;
+    private GameObject enemyFoot;
 
     private Vector3 footPosition;
 
@@ -19,9 +19,10 @@ public class BrokenParts : MonoBehaviour
     
     private void Start()
     {
+        enemyFoot = GameObject.Find("EnemyFoot");
         footPosition = enemyFoot.transform.position;
-        yForce = Random.Range(-0.05f, 0.1f);
-        xForce = Random.Range(-0.5f, 0.5f);
+        yForce = Random.Range(-0.05f, 0.65f);
+        xForce = Random.Range(-0.25f, 0.25f);
         gravity = Random.Range(0.045f, 0.01f);
         randomPosition = new Vector3 (footPosition.x + Random.Range(-2f, 2f),
         footPosition.y + Random.Range(-2f, 2f), 0);

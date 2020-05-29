@@ -8,6 +8,8 @@ public class EnemyController : MonoBehaviour
     public int partsNum;
     public int hitPoint; 
 
+    public bool bodyExposed;
+
 
 
 
@@ -15,6 +17,7 @@ public class EnemyController : MonoBehaviour
     {
         hitPoint = 2;
         partsNum = Random.Range(0,7);
+        bodyExposed = true;
     }
 
     // Update is called once per frame
@@ -27,8 +30,12 @@ public class EnemyController : MonoBehaviour
     {
         if(collider.name == "PlayerAttBox" )
         {
-            hitPoint -= 1;
-            Debug.Log("hit!");
+            if (bodyExposed)
+            {
+                hitPoint -= 1;
+                Debug.Log("hit!");
+            }
+            
         }
     }
 }

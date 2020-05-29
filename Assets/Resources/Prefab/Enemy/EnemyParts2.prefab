@@ -1,5 +1,17 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1787609128533438849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002018380365986175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a73c3cfa051ed6d44bc096a51bb1d677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6091276151936317792
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25,7 +37,7 @@ PrefabInstance:
     - target: {fileID: 6444489487226011679, guid: fb192057d97e70d4b89321d41df592a4,
         type: 3}
       propertyPath: m_Name
-      value: EnemyParts 2
+      value: EnemyParts2
       objectReference: {fileID: 0}
     - target: {fileID: 8729228932604291985, guid: fb192057d97e70d4b89321d41df592a4,
         type: 3}
@@ -84,3 +96,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb192057d97e70d4b89321d41df592a4, type: 3}
+--- !u!1 &1002018380365986175 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6444489487226011679, guid: fb192057d97e70d4b89321d41df592a4,
+    type: 3}
+  m_PrefabInstance: {fileID: 6091276151936317792}
+  m_PrefabAsset: {fileID: 0}

@@ -18,7 +18,6 @@ public class EnemyParts : MonoBehaviour
 
     private Dictionary<string, Vector2> randomPoints = new Dictionary<string, Vector2>();
 
-
     private void Awake()
     {
         
@@ -44,6 +43,7 @@ public class EnemyParts : MonoBehaviour
             
             if (enemyParts != null)
             {
+                enemyParts.transform.localScale = new Vector3(0.5f, 0.5f, 0);
                 Instantiate(enemyParts, transform.position + 
                             new Vector3(entry.Value.x, entry.Value.y, 0), transform.rotation, transform);
                
@@ -53,6 +53,7 @@ public class EnemyParts : MonoBehaviour
             
         }
     }
+    //a list with all the possible parts that can attach to the body 
     public List<string> keyToList(Dictionary<string, Vector2> pointsDic)
     {
         List<string> keyList = new List<string>();
@@ -63,6 +64,7 @@ public class EnemyParts : MonoBehaviour
         
         return keyList;
     }
+    //create a dictionary with random selected elements from a list
     private Dictionary<string, Vector2> randomListElement()
     {
         //return a dictionary of matching keys and value
@@ -70,7 +72,6 @@ public class EnemyParts : MonoBehaviour
         Dictionary<string, Vector2> result = new Dictionary<string, Vector2>();
         //Use indexList to make sure every index only appear once
         List<int> indexList = new List<int>();
-        Debug.Log(enemyController.partsNum);
         for (int i = 0; i < keyList.Count; i++)
         {
             indexList.Add(i);
@@ -87,6 +88,8 @@ public class EnemyParts : MonoBehaviour
         }
         return result;
     }
+    //Draw on the points
+    /*
     private void OnDrawGizmos()
     {
 
@@ -97,7 +100,8 @@ public class EnemyParts : MonoBehaviour
                 new Vector3(entry.Value.x, entry.Value.y, 0), 0.5f);
             
         }
-    }
+    }*/
+    //calculate the location information for the parts to attach to
     private void calculatePoint()
     {
         Vector2 upMid = new Vector2 (0, (max.y - center.y)/2);
@@ -109,10 +113,15 @@ public class EnemyParts : MonoBehaviour
         points.Add("head",new Vector2 (0, upMid.y + upMid.y/2));
         points.Add("foot",new Vector2 (0, downMid.y + downMid.y/2));  
     }
+    //if there is no parts on the body, the core is exposed
+    private bool exposedOrNot()
+    {
 
+        return transform.childCount == 0? true : false; 
+    }
     // Update is called once per frame
     void Update()
     {
-        
+        enemyController.bodyExposed = exposedOrNot();
     }
 }
