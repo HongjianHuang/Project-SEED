@@ -25,10 +25,11 @@ public class Player_Movement : MonoBehaviour
     private Controls controls;
     [Header("Config")]
     [SerializeField] private float Y_modifier = 0.67f;
-    [SerializeField] private float speed = 200000000;
-    [SerializeField] private float gravity = 0;
+    [SerializeField] private float speed;
+    [SerializeField] private float gravity;
 
     [SerializeField] private float terminalVelocity = -1.1f;
+    [SerializeField] private float speedModifier;
 
     
     private Vector2 moveInput;
@@ -70,7 +71,7 @@ public class Player_Movement : MonoBehaviour
     {
         if (isRolling || !onGround) return;
         Debug.Log("player is jumping." + dirction);
-        jumpDir = dirction;
+        jumpDir = dirction*speedModifier;
         
 
     }
@@ -126,7 +127,7 @@ public class Player_Movement : MonoBehaviour
                 animator.SetTrigger("playerChop");
                 playerAttBox.gameObject.SetActive(true);
             }
-            playerBody.transform.position = playerBody.transform.position + new Vector3 (0,jumpDir,0);
+            playerBody.transform.localPosition = playerBody.transform.localPosition + new Vector3 (0,jumpDir*Time.deltaTime,0);
         }
 
         if (playerBody.transform.localPosition.y <= 1)
@@ -143,7 +144,7 @@ public class Player_Movement : MonoBehaviour
                 playerAttBox.gameObject.SetActive(true);
             }
             onGround = true;
-            playerBody.transform.localPosition = new Vector3 (0,1,0);
+            playerBody.transform.localPosition = new Vector3 (0,20f*Time.deltaTime,0);
             playerRB.velocity = moveDir;
         }
         
