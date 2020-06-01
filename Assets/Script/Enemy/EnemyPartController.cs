@@ -41,7 +41,7 @@ public class EnemyPartController : MonoBehaviour
     
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collider.name == "PlayerAttBox" )
+        if(collider.tag == "PlayerAttBox" )
         {
             rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, 0.75f);
             FindObjectOfType<HitStop>().Stop(0.1f);

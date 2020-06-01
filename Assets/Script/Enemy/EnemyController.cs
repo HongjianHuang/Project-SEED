@@ -7,14 +7,20 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     public int partsNum;
     public int hitPoint; 
+    private SpriteRenderer rend;
+    private Color originalColor;
+    private GameObject enemyBody;
 
     public bool bodyExposed;
 
 
 
 
-    private void Awake()
+    private void Start()
     {
+        enemyBody = GameObject.Find("EnemyBody");
+        rend = enemyBody.GetComponent<SpriteRenderer>();
+        originalColor = rend.color;
         hitPoint = 2;
         partsNum = Random.Range(0,7);
         bodyExposed = true;
@@ -28,14 +34,22 @@ public class EnemyController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collider.name == "PlayerAttBox" )
+        if(collider.tag == "PlayerAttBox" )
         {
             if (bodyExposed)
             {
-                hitPoint -= 1;
-                Debug.Log("hit!");
+                rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, 0.75f);
+                FindObjectOfType<HitStop>().Stop(0.1f);
+                StartCoroutine(WaitForDamage());
             }
             
         }
+    }
+        IEnumerator WaitForDamage()
+    {
+        while(Time.timeScale != 1.0f) yield return null; 
+        rend.color = originalColor;
+        hitPoint -= 1;
+        Debug.Log("hit!");
     }
 }
