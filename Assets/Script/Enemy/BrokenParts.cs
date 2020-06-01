@@ -21,9 +21,9 @@ public class BrokenParts : MonoBehaviour
     {
         enemyFoot = GameObject.Find("EnemyFoot");
         footPosition = enemyFoot.transform.position;
-        yForce = Random.Range(-0.1f, 0.65f);
-        xForce = Random.Range(-0.25f, 0.25f);
-        gravity = Random.Range(0.045f, 0.01f);
+        yForce = Random.Range(-10f, 50f);
+        xForce = Random.Range(-10f, 10f);
+        gravity = Random.Range(0.9f, 3.5f);
         randomPosition = new Vector3 (footPosition.x + Random.Range(-2f, 2f),
         footPosition.y + Random.Range(-2f, 2f), 0);
         col = gameObject.GetComponent<BoxCollider2D>();
@@ -43,7 +43,7 @@ public class BrokenParts : MonoBehaviour
             enabled = false;
         }
         yForce -= gravity;
-        transform.localPosition =  transform.localPosition + new Vector3(xForce, yForce,0);
+        transform.localPosition =  transform.localPosition + new Vector3(xForce*Time.deltaTime, yForce*Time.deltaTime,0);
 
             
     }
