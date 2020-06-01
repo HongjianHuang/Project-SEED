@@ -450,7 +450,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3180087621477532242}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyParts3Broken
   m_TagString: Untagged
   m_Icon: {fileID: 0}

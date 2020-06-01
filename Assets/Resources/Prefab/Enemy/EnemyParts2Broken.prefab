@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3180087620296169355}
   - component: {fileID: 3180087620296169354}
   - component: {fileID: 3180087620296169352}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyParts 0 Broken 0-3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 3180087620819401458}
   - component: {fileID: 3180087620819401461}
   - component: {fileID: 3180087620819401459}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyParts 0 Broken 0-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -307,7 +307,7 @@ GameObject:
   - component: {fileID: 3180087621026068815}
   - component: {fileID: 3180087621026068814}
   - component: {fileID: 3180087621026068812}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyParts 0 Broken 0-1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -450,7 +450,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3180087621477532242}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyParts2Broken
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -488,7 +488,7 @@ GameObject:
   - component: {fileID: 3180087622295214154}
   - component: {fileID: 3180087622295214157}
   - component: {fileID: 3180087622295214156}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyParts 0 Broken 0-0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
