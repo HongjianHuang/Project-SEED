@@ -389,7 +389,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.009405017, y: -0.9553609}
+  m_Offset: {x: 0.097390056, y: -0.9820585}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -400,7 +400,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.3747137, y: 0.52073574}
+  m_Size: {x: 1.5203514, y: 0.3605423}
   m_EdgeRadius: 0
 --- !u!4 &386250387
 Transform:
@@ -1119,6 +1119,7 @@ GameObject:
   - component: {fileID: 1321051429}
   - component: {fileID: 1321051430}
   - component: {fileID: 1321051431}
+  - component: {fileID: 1321051432}
   m_Layer: 0
   m_Name: PlayerFoot
   m_TagString: PlayerFoot
@@ -1153,7 +1154,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.12343466, y: -0.40025067}
+  m_Offset: {x: 0.1634829, y: -0.44029832}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1164,7 +1165,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5290058, y: 0.40933847}
+  m_Size: {x: 3.5314178, y: 1.0768094}
   m_EdgeRadius: 0
 --- !u!114 &1321051431
 MonoBehaviour:
@@ -1176,6 +1177,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 876e6001e1493684cbeacd59dfc4bd1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1321051432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1321051428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb5646acf54193846a001cbf3d5bc1fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1602801509
