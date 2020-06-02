@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3180087620296169352}
   m_Layer: 10
   m_Name: EnemyParts 0 Broken 0-3
-  m_TagString: Untagged
+  m_TagString: BrokenParts
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 3180087620819401459}
   m_Layer: 10
   m_Name: EnemyParts 0 Broken 0-2
-  m_TagString: Untagged
+  m_TagString: BrokenParts
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -309,7 +309,7 @@ GameObject:
   - component: {fileID: 3180087621026068812}
   m_Layer: 10
   m_Name: EnemyParts 0 Broken 0-1
-  m_TagString: Untagged
+  m_TagString: BrokenParts
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -490,7 +490,7 @@ GameObject:
   - component: {fileID: 3180087622295214156}
   m_Layer: 10
   m_Name: EnemyParts 0 Broken 0-0
-  m_TagString: Untagged
+  m_TagString: BrokenParts
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
