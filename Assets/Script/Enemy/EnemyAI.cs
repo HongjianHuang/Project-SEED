@@ -12,16 +12,20 @@ public class EnemyAI : MonoBehaviour
 
     public float nextWayPointDistance = 3f;
     public float triggerDistance = 10f; 
+    public bool targetInRange = false; 
+    public float range = 15f;
     private Path path;
     private int currentWayPoint = 0;
     private bool reachedEndOfPath = false; 
     //private NPCController nController;
-    private float distance; 
+    private float totalDistance; 
 
     private Seeker seeker;
     private Rigidbody2D rb;
     private Vector2 roamingP;
     private WaitForSeconds waitForSeconds = new WaitForSeconds(0.1f);
+
+    
     void Start()
     {
         //nController = FindObjectOfType<NPCController>();
@@ -32,7 +36,9 @@ public class EnemyAI : MonoBehaviour
     }
     void UpdatePath()
     {
+
         seeker.StartPath(rb.position, target.position, OnPathComplete);
+
     }
     private Vector2 roamingPosition()
     {
@@ -57,6 +63,17 @@ public class EnemyAI : MonoBehaviour
     
 
     // Update is called once per frame
+    void LateUpdate()
+    {
+        if (totalDistance < range)
+        {
+            targetInRange = true;
+        }
+        else
+        {
+            targetInRange = false;
+        }
+    }
     void FixedUpdate()
     {
         if (path == null) return; 
@@ -76,8 +93,8 @@ public class EnemyAI : MonoBehaviour
         Vector2 direction = ((Vector2)path.vectorPath[currentWayPoint] - rb.position).normalized;
         Vector2 force = direction * speed * Time.deltaTime;
         rb.AddForce(force);
-        distance = Vector2.Distance(rb.position, path.vectorPath[currentWayPoint]);
-
+        float distance = Vector2.Distance(rb.position, path.vectorPath[currentWayPoint]);
+        totalDistance = Vector2.Distance(rb.position, path.vectorPath[path.vectorPath.Count - 1]);
         if (distance < nextWayPointDistance)
         {
             currentWayPoint++;
