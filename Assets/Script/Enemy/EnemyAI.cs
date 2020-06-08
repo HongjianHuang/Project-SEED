@@ -7,28 +7,31 @@ using Pathfinding;
 public class EnemyAI : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Transform target;
-    public float speed = 200;
-
+    
+    public float speed = 200;  
     public float nextWayPointDistance = 3f;
     public float triggerDistance = 10f; 
     public bool targetInRange = false; 
-    public float range = 15f;
+    public float range;
+    public float timer = 0;
     private Path path;
     private int currentWayPoint = 0;
     private bool reachedEndOfPath = false; 
     //private NPCController nController;
-    private float totalDistance; 
+    public float totalDistance; 
 
     private Seeker seeker;
     private Rigidbody2D rb;
     private Vector2 roamingP;
     private WaitForSeconds waitForSeconds = new WaitForSeconds(0.1f);
+    private Transform target;
 
     
     void Start()
     {
         //nController = FindObjectOfType<NPCController>();
+        totalDistance = Mathf.Infinity;
+        target = GameObject.FindGameObjectWithTag("Player").transform;
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         InvokeRepeating("UpdatePath", 0f, 0.5f);
@@ -65,15 +68,16 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+        
         if (totalDistance < range)
         {
+            timer = 5f;
             targetInRange = true;
         }
-        else
-        {
-            targetInRange = false;
-        }
+        if (targetInRange) timer -= Time.deltaTime;
+        if (timer <= 0) targetInRange = false;
     }
+    private
     void FixedUpdate()
     {
         if (path == null) return; 
@@ -92,9 +96,15 @@ public class EnemyAI : MonoBehaviour
         //set trigger distance
         Vector2 direction = ((Vector2)path.vectorPath[currentWayPoint] - rb.position).normalized;
         Vector2 force = direction * speed * Time.deltaTime;
-        rb.AddForce(force);
+        
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWayPoint]);
         totalDistance = Vector2.Distance(rb.position, path.vectorPath[path.vectorPath.Count - 1]);
+       
+        if (targetInRange == true)
+        {
+            target = GameObject.FindGameObjectWithTag("Player").transform;
+            rb.AddForce(force);
+        }
         if (distance < nextWayPointDistance)
         {
             currentWayPoint++;

@@ -258,7 +258,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 161087789}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20, y: -1, z: 0}
+  m_LocalPosition: {x: -20.7, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2096217991}
@@ -342,12 +342,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e821b7644dc671645b24c2d8a1328908, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 386250387}
   speed: 200
   nextWayPointDistance: 3
   triggerDistance: 10
   targetInRange: 0
   range: 10
+  timer: 0
+  totalDistance: 0
 --- !u!1 &330271407
 GameObject:
   m_ObjectHideFlags: 0
