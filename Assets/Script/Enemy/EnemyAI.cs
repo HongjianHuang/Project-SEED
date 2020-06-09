@@ -11,7 +11,7 @@ public class EnemyAI : MonoBehaviour
     public float speed = 200;  
     public float nextWayPointDistance = 3f;
     public float triggerDistance = 10f; 
-    public bool targetInRange = false; 
+    private bool targetInRange = false; 
     public float range;
     public float timer = 0;
     private Path path;
@@ -25,6 +25,19 @@ public class EnemyAI : MonoBehaviour
     private Vector2 roamingP;
     private WaitForSeconds waitForSeconds = new WaitForSeconds(0.1f);
     private Transform target;
+    public bool ChangeState
+    {
+        get { return targetInRange;}
+        set
+        {
+            if (value == targetInRange) return;
+            targetInRange = value; 
+            if (!targetInRange)
+            {
+                Debug.Log("should be false" + targetInRange);
+            }
+        }
+    }
 
     
     void Start()
@@ -63,7 +76,6 @@ public class EnemyAI : MonoBehaviour
             currentWayPoint = 0;
         }
     }
-    
 
     // Update is called once per frame
     void LateUpdate()
@@ -72,13 +84,16 @@ public class EnemyAI : MonoBehaviour
         if (totalDistance < range)
         {
             timer = 5f;
-            targetInRange = true;
+
+            ChangeState = true;
         }
-        if (targetInRange) timer -= Time.deltaTime;
-        if (timer <= 0) targetInRange = false;
+        if (ChangeState) timer -= Time.deltaTime;
+        if (timer <= 0) 
+        {
+            ChangeState = false;
+        }
     }
-    private
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (path == null) return; 
         if (currentWayPoint >= path.vectorPath.Count)
@@ -100,7 +115,7 @@ public class EnemyAI : MonoBehaviour
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWayPoint]);
         totalDistance = Vector2.Distance(rb.position, path.vectorPath[path.vectorPath.Count - 1]);
        
-        if (targetInRange == true)
+        if (ChangeState == true)
         {
             target = GameObject.FindGameObjectWithTag("Player").transform;
             rb.AddForce(force);
