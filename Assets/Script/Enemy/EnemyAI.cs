@@ -14,6 +14,8 @@ public class EnemyAI : MonoBehaviour
     private bool targetInRange = false; 
     public float range;
     public float timer = 0;
+
+    public Vector2 force; 
     private Path path;
     private int currentWayPoint = 0;
     private bool reachedEndOfPath = false; 
@@ -25,6 +27,8 @@ public class EnemyAI : MonoBehaviour
     private Vector2 roamingP;
     private WaitForSeconds waitForSeconds = new WaitForSeconds(0.1f);
     private Transform target;
+    private ChasingAI cAI;
+    private RomingAI rAI;
     public bool ChangeState
     {
         get { return targetInRange;}
@@ -35,6 +39,7 @@ public class EnemyAI : MonoBehaviour
             if (!targetInRange)
             {
                 Debug.Log("should be false" + targetInRange);
+                rAI.enabled = true;
             }
         }
     }
@@ -43,6 +48,8 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         //nController = FindObjectOfType<NPCController>();
+        cAI = GetComponent<ChasingAI>();
+        rAI = GetComponent<RomingAI>();
         totalDistance = Mathf.Infinity;
         target = GameObject.FindGameObjectWithTag("Player").transform;
         seeker = GetComponent<Seeker>();
@@ -90,9 +97,11 @@ public class EnemyAI : MonoBehaviour
         if (ChangeState) timer -= Time.deltaTime;
         if (timer <= 0) 
         {
+            cAI.enabled = false;
             ChangeState = false;
         }
     }
+
     private void FixedUpdate()
     {
         if (path == null) return; 
@@ -110,15 +119,15 @@ public class EnemyAI : MonoBehaviour
         //turn face;
         //set trigger distance
         Vector2 direction = ((Vector2)path.vectorPath[currentWayPoint] - rb.position).normalized;
-        Vector2 force = direction * speed * Time.deltaTime;
+        force = direction * speed * Time.deltaTime;
         
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWayPoint]);
         totalDistance = Vector2.Distance(rb.position, path.vectorPath[path.vectorPath.Count - 1]);
-       
+
         if (ChangeState == true)
         {
-            target = GameObject.FindGameObjectWithTag("Player").transform;
-            rb.AddForce(force);
+            rAI.enabled = false;
+            cAI.enabled = true;   
         }
         if (distance < nextWayPointDistance)
         {

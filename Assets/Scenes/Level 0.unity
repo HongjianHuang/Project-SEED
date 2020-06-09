@@ -243,6 +243,8 @@ GameObject:
   - component: {fileID: 161087792}
   - component: {fileID: 161087793}
   - component: {fileID: 161087794}
+  - component: {fileID: 161087796}
+  - component: {fileID: 161087795}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -345,10 +347,33 @@ MonoBehaviour:
   speed: 200
   nextWayPointDistance: 3
   triggerDistance: 10
-  targetInRange: 0
   range: 10
   timer: 0
   totalDistance: 0
+--- !u!114 &161087795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161087789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4acfef1af36f2c44785b87c0febf7e91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &161087796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161087789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 999cad15763e33d4cb709cc6957db41a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &330271407
 GameObject:
   m_ObjectHideFlags: 0
