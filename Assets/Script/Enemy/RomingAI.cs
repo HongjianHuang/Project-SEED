@@ -35,6 +35,18 @@ public class RomingAI : MonoBehaviour
         }
         return result;
     }
+    public bool ChackRayCast(Rigidbody2D rb, float distance, int layerMask)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(rb.position, -Vector2.up, distance, layerMask);
+        RaycastHit2D hit1 = Physics2D.Raycast(rb.position, Vector2.up, distance, layerMask);
+        RaycastHit2D hit2 = Physics2D.Raycast(rb.position, -Vector2.right, distance, layerMask);
+        RaycastHit2D hit3 = Physics2D.Raycast(rb.position, Vector2.right, distance, layerMask);
+        if (hit.collider != null||hit1.collider!= null||hit2.collider!= null||hit3.collider != null)
+        {
+            return true;
+        }
+        else return false; 
+    }
 
     // Update is called once per frame
     void FixedUpdate()
