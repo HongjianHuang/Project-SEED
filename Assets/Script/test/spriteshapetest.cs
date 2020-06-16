@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D;
-
+using Pathfinding;
 public class spriteshapetest : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -11,10 +11,12 @@ public class spriteshapetest : MonoBehaviour
 
     public SpriteShapeController prefabFront;
     public SpriteShapeController prefabOpp;
+    public SpriteShapeController prefabBase;
     public GameObject spriteshape;
     public GameObject spriteshapeTop;
     public GameObject spriteshapeFront; 
     public GameObject spriteshapeOpp;
+    public GameObject spriteshapeBase;
     public float centerPoint; 
     public float maxDistance;  
     private Vector3 p;
@@ -23,6 +25,8 @@ public class spriteshapetest : MonoBehaviour
     private Vector3 pt1;
     private Vector3 po;
     private Vector3 po1;
+    private Vector3 pb;
+    private Vector3 pb1;
     public float maxX;
     public float minX;
     public float maxY;
@@ -31,6 +35,9 @@ public class spriteshapetest : MonoBehaviour
     public float startPoint; 
     public float endPoint; 
     public float ratio; 
+
+    public GameObject AIMap;
+    public AstarPath pathfinder;
 
     
 
@@ -45,6 +52,8 @@ public class spriteshapetest : MonoBehaviour
         prefab = spriteshape.GetComponent<SpriteShapeController>();
         prefabFront = spriteshapeFront.GetComponent<SpriteShapeController>();
         prefabOpp = spriteshapeOpp.GetComponent<SpriteShapeController>();
+        prefabBase = spriteshapeBase.GetComponent<SpriteShapeController>();
+        pathfinder = AIMap.GetComponent<AstarPath>();
         int points = prefab.spline.GetPointCount();
         for (int i = 0; i < points; i++)
         {
@@ -60,6 +69,8 @@ public class spriteshapetest : MonoBehaviour
         p1 = prefab.spline.GetPosition(1);
         pt= prefabTop.spline.GetPosition(1);
         pt1 = prefabTop.spline.GetPosition(2);
+        pb = prefabBase.spline.GetPosition(1);
+        pb1 = prefabBase.spline.GetPosition(2);
         po = prefabOpp.spline.GetPosition(0);
         po1 = prefabOpp.spline.GetPosition(1);
 
@@ -71,14 +82,14 @@ public class spriteshapetest : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         cameraDistance = centerPoint- transform.position.x;
 
 
         //Debug.Log(cameraDistance/maxDistance);
         ratio = (endPoint - startPoint)*(1f - cameraDistance/maxDistance);
-        Debug.Log(ratio);
+        //Debug.Log(ratio);
         /*
         if (p.x >= minX)
         {
@@ -97,12 +108,15 @@ public class spriteshapetest : MonoBehaviour
        
         if (Mathf.Abs(cameraDistance) <= maxDistance)
         {
+            //
             prefab.spline.SetPosition(0, new Vector3(p.x + ratio, p.y, p.z));
             prefab.spline.SetPosition(1, new Vector3(p1.x + ratio, p1.y, p1.z));
             prefabTop.spline.SetPosition(1, new Vector3(pt.x + ratio , pt.y, pt.z));
             prefabTop.spline.SetPosition(2, new Vector3(pt1.x + ratio, pt1.y, pt1.z));
             prefabOpp.spline.SetPosition(0, new Vector3(po.x + ratio, po.y, po.z));
             prefabOpp.spline.SetPosition(1, new Vector3(po1.x + ratio, po1.y, po1.z));
+            prefabBase.spline.SetPosition(1, new Vector3(pb.x + ratio, pb.y, pb.z));
+            prefabBase.spline.SetPosition(2, new Vector3(pb1.x + ratio, pb1.y, pb1.z));
 
         }
         
