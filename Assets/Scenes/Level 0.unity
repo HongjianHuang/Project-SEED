@@ -1046,15 +1046,18 @@ PrefabInstance:
       propertyPath: m_DynamicOccludee
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1685520186, guid: f86ecc5950fbc6a4dac8bb15a7d0a1e2, type: 3}
+      propertyPath: m_ShapeTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1685520186, guid: f86ecc5950fbc6a4dac8bb15a7d0a1e2, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7382489469805154812, guid: f86ecc5950fbc6a4dac8bb15a7d0a1e2,
         type: 3}
       propertyPath: m_Name
       value: Wall
-      objectReference: {fileID: 0}
-    - target: {fileID: 7382489469805154812, guid: f86ecc5950fbc6a4dac8bb15a7d0a1e2,
-        type: 3}
-      propertyPath: m_Icon
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7382489469805154813, guid: f86ecc5950fbc6a4dac8bb15a7d0a1e2,
         type: 3}
@@ -1131,6 +1134,11 @@ PrefabInstance:
       propertyPath: m_DynamicOccludee
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7382489470339393587, guid: f86ecc5950fbc6a4dac8bb15a7d0a1e2,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 7382489471344626434, guid: f86ecc5950fbc6a4dac8bb15a7d0a1e2,
         type: 3}
       propertyPath: m_ShapeTexture
@@ -1184,12 +1192,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   data:
-    dataString: UEsDBBQAAAgIAACYn+sDhsf4cAIAABMFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVE2TojAQ/StWzqsFjKO4t110nD3MR427NRcugTSSMiRUEkadKf/7dgII63oxvP7Ie68bvgiXpobcKr3VnD0pBuT7hLgz+TYZgo9wonsld/wT+px3zmzpkqjPeaOWK8RDV2ZUBVbz/IfcC5ccINhIXihdbdgeEmWsQbigwgCGtLKuWiL0NSEn/JuuXMkZT9HSnT7xtAomFzzmIC3oITVazVb4ixeLrmIazuYOWXV102i2iKMoiMPFZhosfZNG5oJWNTCnaOgVLuKuSdjmSRTbpThhuRKCm44psefaO5HQ2jSoExMYp6jc07vDxxL4vrSO5Lj4pSgM2M4WTc9rrtHAtiv5qVpXK2oOLbEPKhp3TxTMY0+q7fr0X8I09OFCq+qxvzgM3CW25PnhjZ5zauzI9zG8HpiH3qAjFQeaCXgvQT6rrVaNZBi0unGljYFoPTxetSUl5IcBb6negE09ON6PuR+y03Dx8k+J4FXmQrN5C+yE8ob73QCNo/mFhP3mmK4Foo7FHwO/6X68Yl3ggWtjMdSplI5ephrtUsnGe+bUNDZRWoKHO9I1SCrs+RXb2NsZ3sRG195EHqh7mbrLu1j/jtyUeHjID4Kb0Ks6XodlSnV8AlO+NFZwCQNpF3hGnxIlZbtiY0/6sl2jC5qPyvYNZ/+uFsljuA/ni/v7+XwZLrPlFFjG8iwLgiC+Wy6DgPjd4xJ1UvHaEu3swanJobnEPeu/MZOtprVfd6bpccs/KzWynMtC7XINIF/aDlfioPESfC3ZhnE0aAfWcunnTb5SIlR+AJZeG6Ve6eZkNU2HLimp+YeyDklJ4j8qKbmQy19QSwMEFAAACAgAAJif6+1yZfNtAAAAeAAAAAkAJABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGrVipLLSrOzM9TslIw0TPSMzTVUVBKL0osyCgGihiCOKWZKSB2tFKyRaqpoYmZqamJibmheZK5bmpKUkpyUpKBgYGFsbm5gYFSLFB9SWVBql9ibipET0BiSUZaZl5KZl66nntRZoo7yGil2FoAUEsBAi0AFAAACAgAAJif6wOGx/hwAgAAEwUAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAAJif6+1yZfNtAAAAeAAAAAkAJAAAAAAAAAAAAAAAvQIAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAAB1AwAAAAA=
+    dataString: UEsDBBQAAAgIAACYn+vQldbOcQIAABUFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVE2TojAQ/StWzqsFrIrubZdxnD3MR42zNRcugTSSMiRUEkadKf/7dgII63oxvP7Ie68bvgiXpobcKr3VnD0qBuTHhLgz+TYZgg9wonsld/wT+px3zmzpkqjPeaWWK8RDV2ZUBVbz/KfcC5ccINhIXihdbdgeEmWsQbigwgCGtLKuWiL0NSEn/JuuXckZT1HsTp94WgeTCx5zkBb0kBqtZ2v8rZbLrmIazuYOWXd102i2XEVRsAqXm2kQ+yaNzAWtamBO0dArXK66JmGbJ1Fsl+KE5UoIbjqmxJ5r70RCa9OgTkxgnKJyTy+cLRAoge9L62iOy5+LwoDtjNH0fMc1Wtj2Jb9U62tFzaGl9kFF426KgvnK02q7Pv6XMA19uNCqeugvDgN3iS15fnil55waO3J+DN+NuHuLjlQcaCbgvQT5pLZaNZJh0OrGlTYGorvh8aotKSE/DHhL9QZs6sHzftD9mJ2Gi5d/SgSvMheazVtgJ5S33G8HaBzObyTsd8d0LRB1LP4YeKP78ZJ1gXuujcVQp1I6eplqtEslG++ZU9PYRGkJHu5I1yCpsOcXbGNvZ3gTG117E7mn7nXqLu9i/VtyU+LhIT8IbkIv6ngdlinV8RFM+dxYwSUMpF3gCX1KlJTtio096ct2jS5oPirbN5z9u1okX8EinC8Xi/k8DuMsngLLWJ5lQRCsvsdxEBC/e1yiTipeWqKdPTg1OTSXuGf9V2ay1bT26840PW75Z6VGlnNZqF2uAeRz2+FKHDRegi8m2zCOBu3AWi79vMlXSoTKD8DSa6PUK92crKbp0CUlNf9Q1iEpSfxnJSUXcvkLUEsDBBQAAAgIAACYn+vtcmXzbQAAAHgAAAAJACQAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0Bq1YqSy0qzszPU7JSMNEz0jM01VFQSi9KLMgoBooYgjilmSkgdrRSskWqqaGJmampiYm5oXmSuW5qSlJKclKSgYGBhbG5uYGBUixQfUllQapfYm4qRE9AYklGWmZeSmZeup57UWaKO8hopdhaAFBLAQItABQAAAgIAACYn+vQldbOcQIAABUFAAALACQAAAAAAAAAAAAAAAAAAABncmFwaDAuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLAQItABQAAAgIAACYn+vtcmXzbQAAAHgAAAAJACQAAAAAAAAAAAAAAL4CAABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwUGAAAAAAIAAgC4AAAAdgMAAAAA
     upgradeData: 
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
     cacheStartup: 0
-  showNavGraphs: 0
+  showNavGraphs: 1
   showUnwalkableNodes: 1
   debugMode: 0
   debugFloor: 0
@@ -1574,6 +1582,38 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 818473971}
   m_PrefabAsset: {fileID: 0}
+--- !u!60 &1543548558
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543548554}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0, y: 0.34843427}
+      - {x: 0, y: 3.5215201}
+      - {x: 2.045107, y: 1.9323392}
+      - {x: 2, y: -2}
+      - {x: 0.09718518, y: 0.2343178}
+      - {x: 0.025481481, y: 0.31851348}
+      - {x: 0, y: 0.34843427}
 --- !u!1 &1602801509
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,7 +13,6 @@ public class Collecting : MonoBehaviour
     {
         if (other.gameObject.tag == "BrokenParts")
         {
-            Debug.Log("hi");
             
             Destroy(other.gameObject);
         }

@@ -17,6 +17,7 @@ public class BrokenParts : MonoBehaviour
     [SerializeField] private float xForce;
     [SerializeField] private float gravity;
     
+
     private void Start()
     {
         enemyFoot = GameObject.Find("EnemyFoot");
@@ -33,6 +34,13 @@ public class BrokenParts : MonoBehaviour
         Debug.Log(gameObject.transform.position);
         col.enabled = true;
         
+    }
+    void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (coll.tag == "Wall")
+        {
+            Debug.Log("in range of the wall");
+        }
     }
 
     // Update is called once per frame

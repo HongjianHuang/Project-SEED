@@ -97,6 +97,7 @@ public class spriteshapetest : MonoBehaviour
             prefab.spline.SetPosition(0, new Vector3(p.x - Time.deltaTime,p.y,p.z));
             prefab.spline.SetPosition(1, new Vector3(p1.x - Time.deltaTime,p1.y,p1.z));
         }*/
+        /*
         if(Input.GetKey(KeyCode.RightArrow))
         {
             transform.position = new Vector3(transform.position.x + 2f*Time.deltaTime, transform.position.y, -10);
@@ -104,7 +105,7 @@ public class spriteshapetest : MonoBehaviour
         if(Input.GetKey(KeyCode.LeftArrow))
         {
             transform.position = new Vector3(transform.position.x - 2f*Time.deltaTime, transform.position.y, -10);
-        }
+        }*/
        
         if (Mathf.Abs(cameraDistance) <= maxDistance)
         {
