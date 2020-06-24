@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameMangers : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class GameMangers : MonoBehaviour
     }
     public void backToMainMenu()
     {
-
+        SceneManager.LoadScene(0);
     }
     public void gameOver()
     {
@@ -38,8 +39,16 @@ public class GameMangers : MonoBehaviour
     {
 
     }
-    public void LateUpdate()
+    public void quitGame()
     {
+        Application.Quit();
+    }
+    public void Update()
+    {
+        if (Input.GetKey("escape"))
+        {
+            quitGame();
+        }
 
     }
 }
