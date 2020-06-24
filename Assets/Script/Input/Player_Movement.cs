@@ -95,14 +95,14 @@ public class Player_Movement : MonoBehaviour
     private void Roll()
     {
         if (isRolling || !onGround) return;
-        Debug.Log("player is rolling.");
+       
 
     }
     private void Move(Vector2 dirction)
     {
         //if (isRolling || !onGround){return;}
 
-        Debug.Log("Player wants to move:" + dirction);
+        
         moveInput = dirction;
     }
     private void FixedUpdate()
