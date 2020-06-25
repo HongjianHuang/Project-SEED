@@ -10,6 +10,9 @@ public class Player_Movement : MonoBehaviour
     public GameObject playerBody;
 
     public GameObject playerAttBox;
+    public LayerMask enemyLayers;
+    public float attackRange = 0.5f;
+    public Transform attackPoint;
     private Animator animator;
 
     //public GameObject playerBox;
@@ -85,11 +88,11 @@ public class Player_Movement : MonoBehaviour
     {
         if (faceRight == 1)
         {
-            playerBody.transform.localRotation = Quaternion.identity;
+            transform.localRotation = Quaternion.identity;
         }
         if (faceRight != 1)
         {
-            playerBody.transform.localRotation = new Quaternion(0,-180,0,1);
+            transform.localRotation = new Quaternion(0,-180,0,1);
         }
     }
     private void Roll()
@@ -104,6 +107,22 @@ public class Player_Movement : MonoBehaviour
 
         
         moveInput = dirction;
+    }
+    private void Attack()
+    {
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+        foreach(Collider2D enemy in hitEnemies)
+        {
+            Debug.Log("we hit "+ enemy.name);
+        }
+    }
+    private void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null)
+        {
+            return;
+        }
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
     private void FixedUpdate()
     {
@@ -125,7 +144,8 @@ public class Player_Movement : MonoBehaviour
             if(isAttacking == 1)
             {
                 animator.SetTrigger("playerChop");
-                playerAttBox.gameObject.SetActive(true);
+                //playerAttBox.gameObject.SetActive(true);
+                Attack();
             }
             playerBody.transform.localPosition = playerBody.transform.localPosition + new Vector3 (0,jumpDir*Time.deltaTime,0);
         }
@@ -141,7 +161,8 @@ public class Player_Movement : MonoBehaviour
             { 
                 moveDir = new Vector2(0,0);
                 animator.SetTrigger("playerChop");
-                playerAttBox.gameObject.SetActive(true);
+                //playerAttBox.gameObject.SetActive(true);
+                Attack();
             }
             onGround = true;
             playerBody.transform.localPosition = new Vector3 (0,20f*Time.deltaTime,0);

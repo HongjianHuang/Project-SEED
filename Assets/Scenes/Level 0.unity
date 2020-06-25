@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 161087794}
   - component: {fileID: 161087796}
   - component: {fileID: 161087795}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -534,6 +534,7 @@ Transform:
   m_Children:
   - {fileID: 525740030}
   - {fileID: 1321051429}
+  - {fileID: 1115045950}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -573,6 +574,11 @@ MonoBehaviour:
   playerRB: {fileID: 386250388}
   playerBody: {fileID: 525740029}
   playerAttBox: {fileID: 714563957}
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 4096
+  attackRange: 1.27
+  attackPoint: {fileID: 1115045950}
   onGround: 1
   isRolling: 0
   faceRight: 0
@@ -1321,6 +1327,36 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 818473971}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1115045949
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1115045950}
+  m_Layer: 0
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1115045950
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115045949}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.66, y: 0.29, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 386250387}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1115374923
 GameObject:
   m_ObjectHideFlags: 0
