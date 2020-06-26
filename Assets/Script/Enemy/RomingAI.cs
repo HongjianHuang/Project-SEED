@@ -10,24 +10,34 @@ public class RomingAI : MonoBehaviour
     private Rigidbody2D rb;
     private EnemyAI enemyAI;
     public float distance;
+    public float totalDistance; 
     public Vector2 startPosition;
+
+    public float roamingTimeGap = 0.5f;
+    private float currentTime; 
+    private Vector2 force; 
+    
 
 
 
 
     void Start()
     {
+        force = Vector2.zero;
+        currentTime = 0.0f;
         startPosition = transform.position;
         currentTargetPosition = roamingPosition();
+        
         enemyAI = GetComponent<EnemyAI>();
         rb = GetComponent<Rigidbody2D>();
+        totalDistance = Vector2.Distance(rb.position, currentTargetPosition);
     }
 
     private Vector2 roamingPosition()
     {
         
-        float randomX = Random.Range(-3.0f, 3.0f);
-        float randomY = Random.Range(-1.0f, 1.0f);
+        float randomX = Random.Range(-6.0f, 6.0f);
+        float randomY = Random.Range(-2.0f, 2.0f);
         Vector2 result = new Vector2(startPosition.x + randomX, startPosition.y + randomY);
         if (result == null)
         {
@@ -52,13 +62,22 @@ public class RomingAI : MonoBehaviour
     void FixedUpdate()
     {
         Vector2 direction = (currentTargetPosition - rb.position).normalized;
-        Vector2 force = direction * enemyAI.speed * Time.deltaTime;
         distance = Vector2.Distance(rb.position, currentTargetPosition);
-        rb.AddForce(force);
-        if(distance <= 0.05)
+        force = direction * enemyAI.speed * Time.deltaTime * (distance/totalDistance);
+        if(distance <= 0.3)
         {
-            currentTargetPosition = roamingPosition();
+            if (Time.time >= currentTime)
+            {
+                Debug.Log("waiting");
+                currentTime += Time.time + roamingTimeGap;
+                currentTargetPosition = roamingPosition();
+                totalDistance = Vector2.Distance(rb.position, currentTargetPosition);
+                force = Vector2.zero;
+            }      
         }
+        rb.AddForce(force);
+        
+       
 
     }
 }

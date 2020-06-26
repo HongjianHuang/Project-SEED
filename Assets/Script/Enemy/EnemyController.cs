@@ -32,6 +32,15 @@ public class EnemyController : MonoBehaviour
     {
         if (hitPoint <= 0) gameObject.SetActive(false);
     }
+    public void TakeDamage()
+    {
+        if(bodyExposed)
+        {
+            rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, 0.75f);
+            FindObjectOfType<HitStop>().Stop(0.1f);
+            StartCoroutine(WaitForDamage());
+        }
+    }
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if(collider.tag == "PlayerAttBox" )
@@ -45,7 +54,7 @@ public class EnemyController : MonoBehaviour
             
         }
     }
-        IEnumerator WaitForDamage()
+    IEnumerator WaitForDamage()
     {
         while(Time.timeScale != 1.0f) yield return null; 
         rend.color = originalColor;

@@ -63,18 +63,7 @@ public class EnemyAI : MonoBehaviour
         seeker.StartPath(rb.position, target.position, OnPathComplete);
 
     }
-    private Vector2 roamingPosition()
-    {
-        
-        float randomX = Random.Range(-5.0f, 5.0f);
-        float randomY = Random.Range(-0.5f, 5.0f);
-        Vector2 result = new Vector2(randomX,randomY);
-        if (result == null)
-        {
-            result = transform.position;
-        }
-        return result;
-    }
+    
     void OnPathComplete(Path p)
     {
         if (!p.error)

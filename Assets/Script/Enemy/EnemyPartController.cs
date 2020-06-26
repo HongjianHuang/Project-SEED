@@ -5,9 +5,9 @@ using UnityEngine;
 public class EnemyPartController : MonoBehaviour
 {
     // Start is called before the first frame update
-    private int hitPoint;
-    private SpriteRenderer rend;
-    private Color originalColor;
+    public int hitPoint;
+    public SpriteRenderer rend;
+    public Color originalColor;
     private string fileName;
     private Shader hitShader;
 
@@ -38,7 +38,13 @@ public class EnemyPartController : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
+    public void TakeDamage()
+    {
+        rend.color = new Color(rend.color.r, rend.color.g, rend.color.b, 0.75f);
+        FindObjectOfType<HitStop>().Stop(0.1f);
+        StartCoroutine(WaitForDamage());
+    }
+    /*    
     void OnTriggerEnter2D(Collider2D collider)
     {
         if(collider.tag == "PlayerAttBox" )
@@ -50,7 +56,7 @@ public class EnemyPartController : MonoBehaviour
             
                        
         }
-    }
+    }*/
     IEnumerator WaitForDamage()
     {
         while(Time.timeScale != 1.0f) yield return null; 

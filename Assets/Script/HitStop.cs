@@ -12,10 +12,6 @@ public class HitStop : MonoBehaviour
         Time.timeScale = 0.0f;
         StartCoroutine(Wait(duration));
     }
-    public void WaitSeconds(float duration)
-    {
-        StartCoroutine(Coroutine(duration));
-    }
     IEnumerator Wait(float duration)
     {
         waiting = true; 
@@ -23,8 +19,5 @@ public class HitStop : MonoBehaviour
         Time.timeScale = 1.0f;
         waiting = false; 
     }
-    IEnumerator Coroutine(float duration)
-    {
-        yield return new WaitForSeconds(duration);
-    }
+
 }

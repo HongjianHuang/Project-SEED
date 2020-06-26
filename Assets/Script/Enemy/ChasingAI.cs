@@ -10,6 +10,7 @@ public class ChasingAI : MonoBehaviour
 
     private EnemyAI enemyAI;
     private Rigidbody2D rb;
+    
     void Start()
     {
         enemyAI = GetComponent<EnemyAI>();

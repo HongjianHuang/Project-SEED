@@ -46,7 +46,7 @@ public class BrokenParts : MonoBehaviour
                 float randomBounceBack = Random.Range(coll.bounds.min.y, coll.bounds.max.y);
                 Debug.Log("randomBounceBack "+randomBounceBack);
                 Debug.Log("self position "+transform.position.y);
-                if (transform.position.y >= randomBounceBack) 
+                if (transform.position.y <= randomBounceBack) 
                 {
                     
                     xForce = -xForce;
