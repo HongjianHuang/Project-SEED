@@ -10,6 +10,7 @@ public class GameMangers : MonoBehaviour
     private GameObject endPoint;
 
     private GameObject player;
+    public GameObject wall;
 
     public void Start()
     {
@@ -17,6 +18,7 @@ public class GameMangers : MonoBehaviour
         endPoint = GameObject.Find("End Point");
         player = GameObject.Find("Player");
         player.transform.position = startPoint.transform.position;
+        Instantiate(wall, new Vector3(7.5f, 3.6649f, 0f),transform.rotation);
 
     }
     public void backToCheckPoint()
