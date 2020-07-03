@@ -18,7 +18,7 @@ public class GameMangers : MonoBehaviour
         endPoint = GameObject.Find("End Point");
         player = GameObject.Find("Player");
         player.transform.position = startPoint.transform.position;
-        Instantiate(wall, new Vector3(7.5f, 3.6649f, 0f),transform.rotation);
+        //Instantiate(wall, new Vector3(7.5f, 3.6649f, 0f),transform.rotation);
 
     }
     public void backToCheckPoint()

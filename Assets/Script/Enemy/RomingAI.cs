@@ -12,6 +12,8 @@ public class RomingAI : MonoBehaviour
     public float distance;
     public float totalDistance; 
     public Vector2 startPosition;
+    public Vector2 direction;
+    public float speed;
 
     public float roamingTimeGap = 0.5f;
     private float currentTime; 
@@ -57,13 +59,38 @@ public class RomingAI : MonoBehaviour
         }
         else return false; 
     }
+    public float SpeedAlter()
+    {
+        float angleBetween = Vector2.Angle(Vector2.right, direction);
+        float numerator = Mathf.Abs(90f - angleBetween);
+        float alterFactor = enemyAI.maxSpeedRange*(numerator/90f);
+        if (numerator/90f < 1)
+        {
+           
+            return alterFactor;
+        }
+        
+        return enemyAI.maxSpeedRange;
+    }
 
     // Update is called once per frame
+    void Update()
+    {
+        if (force.x >= 0.01f)
+        {
+            transform.localScale = new Vector3(-1f,1f,1f);
+        }
+        if (force.x < -0.01f)
+        {
+            transform.localScale = new Vector3(1f,1f,1f);
+        }
+    }
     void FixedUpdate()
     {
-        Vector2 direction = (currentTargetPosition - rb.position).normalized;
+        direction = (currentTargetPosition - rb.position).normalized;
         distance = Vector2.Distance(rb.position, currentTargetPosition);
-        force = direction * enemyAI.speed * Time.deltaTime * (distance/totalDistance);
+        speed = enemyAI.minSpeed + SpeedAlter();
+        force = direction * speed * Time.deltaTime * (distance/totalDistance);
         if(distance <= 0.3)
         {
             if (Time.time >= currentTime)
@@ -75,6 +102,7 @@ public class RomingAI : MonoBehaviour
                 force = Vector2.zero;
             }      
         }
+        
         rb.AddForce(force);
         
        

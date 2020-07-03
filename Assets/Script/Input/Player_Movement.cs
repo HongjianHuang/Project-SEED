@@ -9,7 +9,6 @@ public class Player_Movement : MonoBehaviour
     public Rigidbody2D playerRB; 
     public GameObject playerBody;
 
-    public GameObject playerAttBox;
     public LayerMask enemyLayers;
     public float attackRange = 0.5f;
     public Transform attackPoint;
@@ -60,8 +59,6 @@ public class Player_Movement : MonoBehaviour
         controls.Player.Jump.performed += ctx => Jump(ctx.ReadValue<float>());
         controls.Player.Roll.performed += ctx => Roll();
         controls.Player.Att.performed += ctx => Att(ctx.ReadValue<float>());
-        playerAttBox.transform.localPosition = Vector3.zero;
-
         //playerB = playerBox.GetComponent<BoxCollider2D>();
 
 
@@ -88,11 +85,11 @@ public class Player_Movement : MonoBehaviour
     {
         if (faceRight == 1)
         {
-            transform.localRotation = Quaternion.identity;
+            transform.rotation = Quaternion.identity;
         }
         if (faceRight != 1)
         {
-            transform.localRotation = new Quaternion(0,-180,0,1);
+            transform.rotation = new Quaternion(0,-180,0,1);
         }
     }
     private void Roll()
@@ -116,12 +113,10 @@ public class Player_Movement : MonoBehaviour
             
             if (enemy.GetComponent<EnemyController>() != null)
             {
-                //Debug.Log("we hit "+ enemy.tag);
                 enemy.GetComponent<EnemyController>().TakeDamage();
             }
             if (enemy.GetComponent<EnemyPartController>() != null)
             {
-                Debug.Log("we hit "+ enemy.GetComponent<EnemyPartController>());
                 enemy.GetComponent<EnemyPartController>().TakeDamage();
             }
         }
@@ -142,11 +137,6 @@ public class Player_Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow)) faceRight = -1;
         if (Input.GetKey(KeyCode.RightArrow)) faceRight = 1;
         Rotation();
-        if(isAttacking == 0)
-        {
-            playerAttBox.gameObject.SetActive(false);
-
-        }
         if (jumpDir >= terminalVelocity || playerBody.transform.localPosition.y > 1)
         {
             onGround = false;
