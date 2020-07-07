@@ -12,8 +12,14 @@ public class EnemySummon : MonoBehaviour
     void Start()
     {
         enemy = Resources.Load("Prefab/Enemy/Enemy", typeof(GameObject)) as GameObject;
+        EnemySumm(enemyNumber);
 
-        for (int i = 0; i < enemyNumber;i++)
+        
+        
+    }
+    public void EnemySumm(int number)
+    {
+        for (int i = 0; i < number;i++)
         {
             
             float randomY = Random.Range(map.GetComponent<BoxCollider2D>().bounds.max.y,map.GetComponent<BoxCollider2D>().bounds.min.y);
@@ -21,6 +27,12 @@ public class EnemySummon : MonoBehaviour
             Vector2 randomPosition = new Vector2(randomX, randomY);
             Instantiate(enemy, randomPosition, transform.rotation);
         }
-        
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            EnemySumm(1);
+        }
     }
 }
