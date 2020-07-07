@@ -345,6 +345,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e821b7644dc671645b24c2d8a1328908, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpeedRange: 140
+  minSpeed: 70
   speed: 200
   nextWayPointDistance: 3
   triggerDistance: 10
@@ -368,6 +370,8 @@ MonoBehaviour:
   distance: 0
   totalDistance: 0
   startPosition: {x: 0, y: 0}
+  direction: {x: 0, y: 0}
+  speed: 0
   roamingTimeGap: 1
 --- !u!114 &161087796
 MonoBehaviour:
@@ -563,7 +567,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerRB: {fileID: 386250388}
   playerBody: {fileID: 525740029}
-  playerAttBox: {fileID: 0}
   enemyLayers:
     serializedVersion: 2
     m_Bits: 4096
