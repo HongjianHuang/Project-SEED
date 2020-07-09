@@ -39,7 +39,6 @@ public class EnemyParts : MonoBehaviour
         {
             string randomNum = Random.Range(0,5).ToString();
             GameObject enemyParts = Resources.Load("Prefab/Enemy/EnemyParts" + randomNum, typeof(GameObject)) as GameObject;
-            Debug.Log("Prefab/EnemyParts" + randomNum);
             
             if (enemyParts != null)
             {

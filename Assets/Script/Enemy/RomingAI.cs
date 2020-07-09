@@ -95,7 +95,6 @@ public class RomingAI : MonoBehaviour
         {
             if (Time.time >= currentTime)
             {
-                Debug.Log("waiting");
                 currentTime += Time.time + roamingTimeGap;
                 currentTargetPosition = roamingPosition();
                 totalDistance = Vector2.Distance(rb.position, currentTargetPosition);
