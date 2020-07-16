@@ -5,13 +5,13 @@ using UnityEngine;
 public class EnemyTag : MonoBehaviour
 {
     // Start is called before the first frame update
-    public bool gun, knife, hummer, hexapod, track;
+    public bool gun, knife, hammer, hexapod, track;
     public Transform enemyBody; 
     void Start()
     {
         gun = true; 
         knife = true;
-        hummer = true; 
+        hammer = true; 
         hexapod = true; 
         track = true; 
         enemyBody = gameObject.transform.Find("EnemyBody");
@@ -33,7 +33,7 @@ public class EnemyTag : MonoBehaviour
         }
         if (enemyBody.transform.Find("EnemyParts2(Clone)") == null)
         {
-            hummer = false;
+            hammer = false;
         }
         if (enemyBody.transform.Find("EnemyParts3(Clone)") == null)
         {

@@ -7,7 +7,6 @@ using Pathfinding;
 public class EnemyAI : MonoBehaviour
 {
     // Start is called before the first frame update
-    
     public float maxSpeedRange = 140f;
     public float minSpeed = 70f; 
     public float speed = 0;
@@ -16,8 +15,10 @@ public class EnemyAI : MonoBehaviour
     public Vector2 direction; 
     private bool targetInRange = false; 
     public float range;
+    public float attackRange;
     public float timer = 0;
     public Vector2 force; 
+    public int partsCount;
     private Path path;
     private int currentWayPoint = 0;
     private bool reachedEndOfPath = false; 
@@ -30,6 +31,8 @@ public class EnemyAI : MonoBehaviour
     private Transform target;
     private ChasingAI cAI;
     private RomingAI rAI;
+    private EnemyTag enemyTag;
+    private Transform enemyBody;
     public bool ChangeState
     {
         get { return targetInRange;}
@@ -43,7 +46,7 @@ public class EnemyAI : MonoBehaviour
                 rAI.enabled = true;
             }
         }
-    }  
+    } 
     void Start()
     {
         //nController = FindObjectOfType<NPCController>();
@@ -55,6 +58,9 @@ public class EnemyAI : MonoBehaviour
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         InvokeRepeating("UpdatePath", 0f, 0.5f);
+        enemyTag = GetComponent<EnemyTag>();
+        enemyBody = gameObject.transform.Find("EnemyBody");
+         
         
     }
     void UpdatePath()
@@ -63,15 +69,9 @@ public class EnemyAI : MonoBehaviour
         seeker.StartPath(rb.position, target.position, OnPathComplete);
 
     }
-    public float SpeedAlter()
-    {
-        float angleBetween = Vector2.Angle(Vector2.right, direction);
-        float numerator = Mathf.Abs(90f - angleBetween);
-        float alterFactor = maxSpeedRange*(numerator/90f);
-        if (numerator/90f < 1)
-        {
-            return alterFactor;
-        }
+    public float SpeedAlter(){
+    
+    
         
         return maxSpeedRange;
     }
@@ -85,15 +85,35 @@ public class EnemyAI : MonoBehaviour
             currentWayPoint = 0;
         }
     }
+    public void CheckTags()
+    {
+        //checks the tags of the enemy, and dejuest the attributes accordingly
+        if (enemyTag == null)
+        {
+            Debug.Log(transform.name + " enemyTag not found");
+        }
+        if (enemyTag.gun) 
+        {
+            attackRange = 6;
+        }
+        else if (enemyTag.knife)
+        {
+            attackRange = 2;
+        }
+        else if (enemyTag.hammer)
+        {
+            attackRange = 3;
+        }
+    }
 
     // Update is called once per frame
     void LateUpdate()
     {
+        CheckTags();
         
         if (totalDistance < range)
         {
             timer = 5f;
-
             ChangeState = true;
         }
         if (ChangeState) timer -= Time.deltaTime;
@@ -102,6 +122,7 @@ public class EnemyAI : MonoBehaviour
             cAI.enabled = false;
             ChangeState = false;
         }
+        
     }
    
     private void FixedUpdate()
@@ -133,6 +154,7 @@ public class EnemyAI : MonoBehaviour
             rAI.enabled = false;
             cAI.enabled = true;   
         }
+
         if (distance < nextWayPointDistance)
         {
             currentWayPoint++;

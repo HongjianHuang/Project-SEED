@@ -18,10 +18,7 @@ public class EnemyParts : MonoBehaviour
 
     private Dictionary<string, Vector2> randomPoints = new Dictionary<string, Vector2>();
 
-    private void Awake()
-    {
-        
-    }
+ 
     void Start()
     {
         enemyController = gameObject.GetComponentInParent<EnemyController>();

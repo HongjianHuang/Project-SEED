@@ -39,13 +39,11 @@ public class BrokenParts : MonoBehaviour
     {
         if (coll.tag == "Wall")
         {
-            Debug.Log("randomPosition "+randomPosition.y);
-            Debug.Log("coll low point " + coll.bounds.min.y);
+            
             if (randomPosition.y > coll.bounds.min.y)
             {
                 float randomBounceBack = Random.Range(coll.bounds.min.y, coll.bounds.max.y);
-                Debug.Log("randomBounceBack "+randomBounceBack);
-                Debug.Log("self position "+transform.position.y);
+               
                 if (transform.position.y <= randomBounceBack) 
                 {
                     
@@ -53,9 +51,7 @@ public class BrokenParts : MonoBehaviour
 
                 }
             }
-            //Debug.Log("in range of the wall");
-            
-            //Debug.Log(coll.bounds.min.y);
+           
         }
     }
 
