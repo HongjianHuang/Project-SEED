@@ -33,7 +33,6 @@ public class BrokenParts : MonoBehaviour
         Debug.Log(randomPosition);
         Debug.Log(gameObject.transform.position);
         col.enabled = true;
-        
     }
     void OnTriggerEnter2D(Collider2D coll)
     {
