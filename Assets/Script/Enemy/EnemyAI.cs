@@ -102,7 +102,7 @@ public class EnemyAI : MonoBehaviour
         }
         if (enemyTag.gun) 
         {
-            attackRange = 8;
+            attackRange = 15;
         }
         else if (enemyTag.knife)
         {
@@ -110,14 +110,14 @@ public class EnemyAI : MonoBehaviour
         }
         else if (enemyTag.hammer)
         {
-            attackRange = 4;
+            attackRange = 6;
         }
     }
 
     // Update is called once per frame
     public void ChangeMode()
     {
-        if(totalDistance >4 && enemyTag.gun) attackMode = attackModeManager.gun;
+        if(totalDistance >15 && enemyTag.gun) attackMode = attackModeManager.gun;
         else if (totalDistance > 2 && enemyTag.hammer)attackMode = attackModeManager.hammer;
         else if (enemyTag.knife)attackMode = attackModeManager.knife;
         else attackMode = attackModeManager.none; 
