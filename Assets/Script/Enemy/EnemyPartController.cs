@@ -14,6 +14,7 @@ public class EnemyPartController : MonoBehaviour
     private GameObject enemyPartsBroken;
     void Start()
     {
+
         hitPoint = 2;
         rend = GetComponent<SpriteRenderer>();
         originalColor = rend.color;

@@ -4,6 +4,13 @@ using UnityEngine;
 using Pathfinding;
 
 
+public enum attackModeManager
+    {
+        gun,
+        knife,
+        hammer,
+        none
+    };
 public class EnemyAI : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -18,6 +25,7 @@ public class EnemyAI : MonoBehaviour
     public float attackRange;
     public float timer = 0;
     public Vector2 force; 
+    public attackModeManager attackMode;
     public int partsCount;
     private Path path;
     private int currentWayPoint = 0;
@@ -94,7 +102,7 @@ public class EnemyAI : MonoBehaviour
         }
         if (enemyTag.gun) 
         {
-            attackRange = 6;
+            attackRange = 8;
         }
         else if (enemyTag.knife)
         {
@@ -102,11 +110,18 @@ public class EnemyAI : MonoBehaviour
         }
         else if (enemyTag.hammer)
         {
-            attackRange = 3;
+            attackRange = 4;
         }
     }
 
     // Update is called once per frame
+    public void ChangeMode(float distance)
+    {
+        if(distance >4 && enemyTag.gun) attackMode = attackModeManager.gun;
+        else if (distance > 2 && enemyTag.hammer)attackMode = attackModeManager.hammer;
+        else if (enemyTag.knife)attackMode = attackModeManager.knife;
+        else attackMode = attackModeManager.none; 
+    }
     void LateUpdate()
     {
         CheckTags();
@@ -127,6 +142,7 @@ public class EnemyAI : MonoBehaviour
    
     private void FixedUpdate()
     {
+        
         
         if (path == null) return; 
         if (currentWayPoint >= path.vectorPath.Count)
@@ -159,6 +175,7 @@ public class EnemyAI : MonoBehaviour
         {
             currentWayPoint++;
         }
+        
             
 
     }
