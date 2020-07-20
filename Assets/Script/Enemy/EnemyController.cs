@@ -59,6 +59,5 @@ public class EnemyController : MonoBehaviour
         while(Time.timeScale != 1.0f) yield return null; 
         rend.color = originalColor;
         hitPoint -= 1;
-        Debug.Log("hit!");
     }
 }

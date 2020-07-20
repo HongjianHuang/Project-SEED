@@ -29,9 +29,6 @@ public class BrokenParts : MonoBehaviour
         footPosition.y + Random.Range(-2f, 2f), 0);
         col = gameObject.GetComponent<BoxCollider2D>();
         col.enabled = false; 
-        Debug.Log(footPosition);
-        Debug.Log(randomPosition);
-        Debug.Log(gameObject.transform.position);
         col.enabled = true;
     }
     void OnTriggerEnter2D(Collider2D coll)

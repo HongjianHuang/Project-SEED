@@ -21,12 +21,11 @@ public class EnemyPartController : MonoBehaviour
         fileName = gameObject.name.Remove(11) + "Broken";
         enemyPartsBroken = Resources.Load("Prefab/Enemy/" + fileName, typeof(GameObject)) as GameObject;
         hitShader = Shader.Find("GUI/Text Shader");
-        //Debug.Log(hitShader);
-        //parent = transform.parent;
+        
     }
 
 
-    // Update is called once per frame
+   
     void Update()
     {
         
@@ -63,7 +62,6 @@ public class EnemyPartController : MonoBehaviour
         while(Time.timeScale != 1.0f) yield return null; 
         rend.color = originalColor;
         hitPoint -= 1;
-        Debug.Log("hit!");
     }
 
 
