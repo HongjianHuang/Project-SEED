@@ -115,17 +115,17 @@ public class EnemyAI : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void ChangeMode(float distance)
+    public void ChangeMode()
     {
-        if(distance >4 && enemyTag.gun) attackMode = attackModeManager.gun;
-        else if (distance > 2 && enemyTag.hammer)attackMode = attackModeManager.hammer;
+        if(totalDistance >4 && enemyTag.gun) attackMode = attackModeManager.gun;
+        else if (totalDistance > 2 && enemyTag.hammer)attackMode = attackModeManager.hammer;
         else if (enemyTag.knife)attackMode = attackModeManager.knife;
         else attackMode = attackModeManager.none; 
     }
     void LateUpdate()
     {
         CheckTags();
-        
+        ChangeMode();
         if (totalDistance < range)
         {
             timer = 5f;
@@ -164,7 +164,7 @@ public class EnemyAI : MonoBehaviour
         
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWayPoint]);
         totalDistance = Vector2.Distance(rb.position, path.vectorPath[path.vectorPath.Count - 1]);
-
+        
         if (ChangeState == true)
         {
             rAI.enabled = false;
