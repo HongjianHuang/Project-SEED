@@ -353,8 +353,11 @@ MonoBehaviour:
   triggerDistance: 10
   direction: {x: 0, y: 0}
   range: 10
+  attackRange: 0
   timer: 0
   force: {x: 0, y: 0}
+  attackMode: 0
+  partsCount: 0
   totalDistance: 0
 --- !u!114 &161087795
 MonoBehaviour:
@@ -428,7 +431,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gun: 0
   knife: 0
-  hummer: 0
+  hammer: 0
   hexapod: 0
   track: 0
   enemyBody: {fileID: 0}
@@ -501,7 +504,7 @@ GameObject:
   - component: {fileID: 386250386}
   - component: {fileID: 386250388}
   - component: {fileID: 386250389}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
