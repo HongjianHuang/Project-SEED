@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class NewBehaviourScript : MonoBehaviour
+public class EnemyAttack : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject player;
@@ -16,28 +16,33 @@ public class NewBehaviourScript : MonoBehaviour
     
     private Transform hammerAttPoint;
     private Transform knifeAttPoint;
-
+    private SpriteRenderer rend;
+    private float alpha; 
 
     private void OnEnable() 
     {   
-        enemyAI = gameObject.GetComponent<EnemyAI>();
-        enemyTag = gameObject.GetComponent<EnemyTag>();
         enemy =  gameObject.transform.parent.gameObject.transform.parent.gameObject;
+        enemyAI = enemy.GetComponent<EnemyAI>();
+        enemyTag = enemy.GetComponent<EnemyTag>();
         enemyFoot = enemy.transform.Find("EnemyFoot");
         if (gameObject.transform.Find("HammerAttPoint"))
             hammerAttPoint = gameObject.transform.Find("HammerAttPoint");
         if(gameObject.transform.Find("KnifeAttPoint"))
             knifeAttPoint = gameObject.transform.Find("KnifeAttPoint");
-        
+        rend = GetComponent<SpriteRenderer>();
+        alpha = rend.color.a;
+        player = GameObject.Find("Player");
         
             
     }
     void Start()
     {
+       
         
+        
+        Attack();
         //when this script starts, all disable all other scripts.
-        //calling Attack
-        
+        //calling Attack  
 
     }
     
@@ -56,14 +61,11 @@ public class NewBehaviourScript : MonoBehaviour
         {
             //play hammer backswing animation
             //attack animation
-            int attackRange = 3;
+            
+            int attackRange = 10;
             //check if enemy hits the play
-            Collider2D hitPlayer = Physics2D.OverlapCircle(hammerAttPoint.position, attackRange, playerLayer);
-            if (hitPlayer)
-            {
-                //if hits, reduce player's hp
-                Debug.Log("hit player!");
-            }
+            StartCoroutine(AttackAction(2f, attackRange));
+            // 
             
             
             //afterswing timer   
@@ -86,6 +88,19 @@ public class NewBehaviourScript : MonoBehaviour
             return;
         }
     }
+    private IEnumerator AttackAction(float timer, int attackRange)
+    {
+        //holder for anmitation
+        yield return new WaitForSeconds(timer);
+        Collider2D hitPlayer = Physics2D.OverlapCircle(hammerAttPoint.position, attackRange, playerLayer);
+        if (hitPlayer)
+        {
+            //if hits, reduce player's hp
+            Debug.Log("hit player!");
+        }
+        enabled = false;
+
+    }
     private void Shoot()
     {
         //cast a ray to the position where it was aiming at. 
@@ -95,6 +110,15 @@ public class NewBehaviourScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(rend.color.a == alpha)
+        {
+            rend.color = new Color (rend.color.r, rend.color.g,rend.color.b,0.5f);
+        }
+        if(rend.color.a != alpha)
+        {
+            rend.color = new Color (rend.color.r, rend.color.g,rend.color.b,alpha);
+        }
+        Attack();
         
     }
 }

@@ -1,5 +1,26 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8204265987345843519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002018380365986175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e4aa106a6203614bbb8ec8351926076, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  aimingPosition: {x: 0, y: 0}
+  enemyAI: {fileID: 0}
+  enemyTag: {fileID: 0}
+  enemyFoot: {fileID: 0}
+  enemy: {fileID: 0}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8192
 --- !u!1 &1208593690737797083
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,6 +140,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb192057d97e70d4b89321d41df592a4, type: 3}
+--- !u!1 &1002018380365986175 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6444489487226011679, guid: fb192057d97e70d4b89321d41df592a4,
+    type: 3}
+  m_PrefabInstance: {fileID: 6091276151936317792}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3291282598483464945 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8729228932604291985, guid: fb192057d97e70d4b89321d41df592a4,

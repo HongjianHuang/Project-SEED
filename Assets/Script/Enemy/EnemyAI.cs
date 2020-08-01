@@ -50,7 +50,7 @@ public class EnemyAI : MonoBehaviour
             targetInRange = value; 
             if (!targetInRange)
             {
-                Debug.Log("should be false" + targetInRange);
+                //Debug.Log("should be false" + targetInRange);
                 rAI.enabled = true;
             }
         }
