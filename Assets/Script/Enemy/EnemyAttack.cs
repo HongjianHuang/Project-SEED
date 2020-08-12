@@ -13,7 +13,7 @@ public class EnemyAttack : MonoBehaviour
     public Transform enemyFoot;
     public GameObject enemy;
     public LayerMask playerLayer;
-    
+    public float hammerAttRange = 1.5f;
     private Transform hammerAttPoint;
     private Transform knifeAttPoint;
     private SpriteRenderer rend;
@@ -41,6 +41,7 @@ public class EnemyAttack : MonoBehaviour
         
         
         Attack();
+        //enabled = false;
         //when this script starts, all disable all other scripts.
         //calling Attack  
 
@@ -62,9 +63,9 @@ public class EnemyAttack : MonoBehaviour
             //play hammer backswing animation
             //attack animation
             
-            int attackRange = 10;
             //check if enemy hits the play
-            StartCoroutine(AttackAction(2f, attackRange));
+            StartCoroutine(AttackAction(2f, hammerAttRange));
+            enabled = false;
             // 
             
             
@@ -87,8 +88,10 @@ public class EnemyAttack : MonoBehaviour
             //play normal backswing animation
             return;
         }
+        
+        
     }
-    private IEnumerator AttackAction(float timer, int attackRange)
+    private IEnumerator AttackAction(float timer, float attackRange)
     {
         //holder for anmitation
         yield return new WaitForSeconds(timer);
@@ -98,7 +101,7 @@ public class EnemyAttack : MonoBehaviour
             //if hits, reduce player's hp
             Debug.Log("hit player!");
         }
-        enabled = false;
+        
 
     }
     private void Shoot()
@@ -110,15 +113,14 @@ public class EnemyAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(rend.color.a == alpha)
-        {
-            rend.color = new Color (rend.color.r, rend.color.g,rend.color.b,0.5f);
-        }
-        if(rend.color.a != alpha)
-        {
-            rend.color = new Color (rend.color.r, rend.color.g,rend.color.b,alpha);
-        }
-        Attack();
         
+        
+        
+    }
+    void OnDrawGizmosSelected()
+    {
+        if (hammerAttPoint == null)
+            return;
+        Gizmos.DrawWireSphere(hammerAttPoint.position,hammerAttRange);
     }
 }
