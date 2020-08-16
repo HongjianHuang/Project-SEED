@@ -6,24 +6,27 @@ public class ChasingAI : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public Vector2 force; 
-    public Vector2 direction; 
+    public Vector3 force; 
+    //public Vector3 direction; 
+    public float totalDistance;
     private EnemyAI enemyAI;
     private Rigidbody2D rb;
-    private float speed;
+    //private float speed;
     
     void Start()
     {
         enemyAI = GetComponent<EnemyAI>();
         rb = GetComponent<Rigidbody2D>();
-        direction = enemyAI.direction;
+        force = enemyAI.force;
+        totalDistance = enemyAI.totalDistance;
+        
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         //direction = enemyAI.direction;
-
+        totalDistance = enemyAI.totalDistance;
         force = enemyAI.force;
         if (force.x >= 0.11f)
         {
@@ -33,7 +36,12 @@ public class ChasingAI : MonoBehaviour
         {
             transform.localScale = new Vector3(1f,1f,1f);
         }
+        if(totalDistance > 1f)
+        {
+            transform.position = transform.position + force;
+        }
         
-        rb.AddForce(force);
+  
+        
     }
 }

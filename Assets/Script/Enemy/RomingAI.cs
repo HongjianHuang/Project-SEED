@@ -12,12 +12,12 @@ public class RomingAI : MonoBehaviour
     public float distance;
     public float totalDistance; 
     public Vector2 startPosition;
-    public Vector2 direction;
+    public Vector3 direction;
     public float speed;
 
     public float roamingTimeGap = 0.5f;
     private float currentTime; 
-    private Vector2 force; 
+    private Vector3 force; 
     
 
 
@@ -25,7 +25,7 @@ public class RomingAI : MonoBehaviour
 
     void Start()
     {
-        force = Vector2.zero;
+        force = Vector3.zero;
         currentTime = 0.0f;
         startPosition = transform.position;
         currentTargetPosition = roamingPosition();
@@ -40,6 +40,10 @@ public class RomingAI : MonoBehaviour
         
         float randomX = Random.Range(-6.0f, 6.0f);
         float randomY = Random.Range(-2.0f, 2.0f);
+        if (randomX < 0f && randomX > -5.0f) randomX = -5.0f;
+        if (randomX > 0f && randomX < 5.0f) randomX = 5.0f;
+        if (randomY > 0f && randomY < 1.5f) randomY = 1.5f;
+        if (randomY < 0f && randomY > -1.5f) randomY = -1.5f;
         Vector2 result = new Vector2(startPosition.x + randomX, startPosition.y + randomY);
         if (result == null)
         {
@@ -90,7 +94,7 @@ public class RomingAI : MonoBehaviour
         direction = (currentTargetPosition - rb.position).normalized;
         distance = Vector2.Distance(rb.position, currentTargetPosition);
         speed = enemyAI.minSpeed + SpeedAlter();
-        force = direction * speed * Time.deltaTime * (distance/totalDistance);
+        force = direction * speed * Time.deltaTime;
         if(distance <= 0.3)
         {
             if (Time.time >= currentTime)
@@ -101,8 +105,11 @@ public class RomingAI : MonoBehaviour
                 force = Vector2.zero;
             }      
         }
+        if (totalDistance > 1f)
+        {
+            transform.position = transform.position + force;
+        }
         
-        rb.AddForce(force);
         
        
 

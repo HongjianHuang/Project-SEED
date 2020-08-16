@@ -14,17 +14,17 @@ public enum attackModeManager
 public class EnemyAI : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float maxSpeedRange = 140f;
-    public float minSpeed = 70f; 
-    public float speed = 0;
+    public float maxSpeedRange;
+    public float minSpeed;
+    public float speed;
     public float nextWayPointDistance = 3f;
     public float triggerDistance = 10f; 
-    public Vector2 direction; 
+    public Vector3 direction; 
     private bool targetInRange = false; 
     public float range;
     public float attackRange;
     public float timer = 0;
-    public Vector2 force; 
+    public Vector3 force; 
     public attackModeManager attackMode;
     public int partsCount;
     private Path path;
@@ -58,7 +58,7 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         //nController = FindObjectOfType<NPCController>();
-        direction = Vector2.zero;
+        direction = Vector3.zero;
         cAI = GetComponent<ChasingAI>();
         rAI = GetComponent<RomingAI>();
         totalDistance = Mathf.Infinity;
@@ -68,7 +68,9 @@ public class EnemyAI : MonoBehaviour
         InvokeRepeating("UpdatePath", 0f, 0.5f);
         enemyTag = GetComponent<EnemyTag>();
         enemyBody = gameObject.transform.Find("EnemyBody");
-         
+        speed = 0f;
+        maxSpeedRange = 2.8f;
+        minSpeed = 1.4f;
         
     }
     void UpdatePath()
@@ -77,9 +79,16 @@ public class EnemyAI : MonoBehaviour
         seeker.StartPath(rb.position, target.position, OnPathComplete);
 
     }
-    public float SpeedAlter(){
-    
-    
+    public float SpeedAlter()
+    {
+        float angleBetween = Vector2.Angle(Vector2.right, direction);
+        float numerator = Mathf.Abs(90f - angleBetween);
+        float alterFactor = maxSpeedRange*(numerator/90f);
+        if (numerator/90f < 1)
+        {
+           
+            return alterFactor;
+        }
         
         return maxSpeedRange;
     }
@@ -158,7 +167,12 @@ public class EnemyAI : MonoBehaviour
         //FindObjectOfType<NPCController>().FollowTarget(path, rb, speed, nextWayPointDistance, currentWayPoint);
         //turn face;
         //set trigger distance
-        direction = ((Vector2)path.vectorPath[currentWayPoint] - rb.position).normalized;
+        //change this 
+        //without using force
+        //move to the next way Point
+        //
+
+        direction = ((Vector3)path.vectorPath[currentWayPoint] - (Vector3)rb.position).normalized;
         speed = minSpeed + SpeedAlter();
         force = direction * speed * Time.deltaTime;
         
