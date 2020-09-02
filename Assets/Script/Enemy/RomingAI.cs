@@ -14,10 +14,12 @@ public class RomingAI : MonoBehaviour
     public Vector2 startPosition;
     public Vector3 direction;
     public float speed;
-
-    public float roamingTimeGap = 0.5f;
+    public int moveNumber;
+    public int moveCount; 
+    public float roamingTimeGap = 3f;
     private float currentTime; 
     private Vector3 force; 
+
     
 
 
@@ -33,6 +35,8 @@ public class RomingAI : MonoBehaviour
         enemyAI = GetComponent<EnemyAI>();
         rb = GetComponent<Rigidbody2D>();
         totalDistance = Vector2.Distance(rb.position, currentTargetPosition);
+        moveNumber = Random.Range(1,6);
+        moveCount = 0;
     }
 
     private Vector2 roamingPosition()
@@ -40,17 +44,26 @@ public class RomingAI : MonoBehaviour
         
         float randomX = Random.Range(-6.0f, 6.0f);
         float randomY = Random.Range(-2.0f, 2.0f);
-        if (randomX < 0f && randomX > -5.0f) randomX = -5.0f;
-        if (randomX > 0f && randomX < 5.0f) randomX = 5.0f;
-        if (randomY > 0f && randomY < 1.5f) randomY = 1.5f;
-        if (randomY < 0f && randomY > -1.5f) randomY = -1.5f;
-        Vector2 result = new Vector2(startPosition.x + randomX, startPosition.y + randomY);
+        Vector2 newPosition = transform.position;
+        Vector2 result = Vector2.zero;
+        if (moveCount >= moveNumber)
+        {
+            result = startPosition;
+            moveCount = 0;
+            moveNumber = Random.Range(1,6);
+        }
         if (result == null)
         {
             result = transform.position;
         }
+        else
+        {
+            result = new Vector2(newPosition.x + randomX, newPosition.y + randomY);
+        }
+        moveCount +=1;
         return result;
     }
+    /*
     public bool ChackRayCast(Rigidbody2D rb, float distance, int layerMask)
     {
         RaycastHit2D hit = Physics2D.Raycast(rb.position, -Vector2.up, distance, layerMask);
@@ -62,7 +75,7 @@ public class RomingAI : MonoBehaviour
             return true;
         }
         else return false; 
-    }
+    }*/
     public float SpeedAlter()
     {
         float angleBetween = Vector2.Angle(Vector2.right, direction);
@@ -70,7 +83,6 @@ public class RomingAI : MonoBehaviour
         float alterFactor = enemyAI.maxSpeedRange*(numerator/90f);
         if (numerator/90f < 1)
         {
-           
             return alterFactor;
         }
         
@@ -94,21 +106,25 @@ public class RomingAI : MonoBehaviour
         direction = (currentTargetPosition - rb.position).normalized;
         distance = Vector2.Distance(rb.position, currentTargetPosition);
         speed = enemyAI.minSpeed + SpeedAlter();
-        force = direction * speed * Time.deltaTime;
-        if(distance <= 0.3)
+        //force = direction * speed * Time.deltaTime;
+    
+        if (Time.time >= currentTime)
         {
-            if (Time.time >= currentTime)
-            {
-                currentTime += Time.time + roamingTimeGap;
-                currentTargetPosition = roamingPosition();
-                totalDistance = Vector2.Distance(rb.position, currentTargetPosition);
-                force = Vector2.zero;
-            }      
+            currentTime += Time.time + roamingTimeGap;
+            currentTargetPosition = roamingPosition();
+            totalDistance = Vector2.Distance(rb.position, currentTargetPosition);
+                //force = Vector2.zero;
         }
-        if (totalDistance > 1f)
+         
+
+        
+        if(distance > 1f)
         {
+            force = direction * speed * Time.deltaTime;
             transform.position = transform.position + force;
         }
+        
+  
         
         
        

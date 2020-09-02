@@ -48,7 +48,18 @@ public class EnemyParts : MonoBehaviour
             
             
         }
+    
     }
+    //I am just typing random things in the commond so thyep can see i working 
+    //i type so fucking slow omg
+    //i am trying to type a random stoy that just about a 
+    //< asjdsss>
+    public int IHaveNOIdea()
+    {
+        int x = 1;
+        return x;
+    }
+    
     //a list with all the possible parts that can attach to the body 
     public List<string> keyToList(Dictionary<string, Vector2> pointsDic)
     {

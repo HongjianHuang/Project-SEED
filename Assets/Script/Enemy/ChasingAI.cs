@@ -28,11 +28,11 @@ public class ChasingAI : MonoBehaviour
         //direction = enemyAI.direction;
         totalDistance = enemyAI.totalDistance;
         force = enemyAI.force;
-        if (force.x >= 0.11f)
+        if (force.x >= 0.01f)
         {
             transform.localScale = new Vector3(-1f,1f,1f);
         }
-        if (force.x < -0.11f)
+        if (force.x < -0.01f)
         {
             transform.localScale = new Vector3(1f,1f,1f);
         }
